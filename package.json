@@ -8,7 +8,10 @@
     "postinstall": "bash ./client/build.sh",
     "start": "node server.js"
   },
-  "cacheDirectories": ["client/node_modules", "node_modules"],
+  "cacheDirectories": [
+    "client/node_modules",
+    "node_modules"
+  ],
   "dependencies": {
     "express": "4.16.3",
     "mongodb": "3.1.1",
