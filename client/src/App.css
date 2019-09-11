@@ -1,12 +1,14 @@
 .App {
-    background: linear-gradient(to top, #ff00cc, #333399);
+    /* background: linear-gradient(to top, #ff00cc, #333399); */
+    /* background-image: url("/wood.jpg");
+    background-size: cover;
     min-height: 100vh;
     display: grid;
     grid-template-columns: 1fr minmax(auto, 800px) 1fr;
     grid-template-rows: 100px auto;
     grid-row-gap: 10px;
     grid-column-gap: 10px;
-    align-items: stretch;
+    align-items: stretch; */
 }
 
 .App-navigation {
