@@ -4,16 +4,24 @@
     display: grid;
     grid-template-columns: 1fr minmax(auto, 800px) 1fr;
     grid-template-rows: 100px auto;
-    grid-row-gap: 10px;
-    grid-column-gap: 10px;
     align-items: stretch;
 }
 
 .App-navigation {
     background: blue;
     grid-column: span 3;
-    padding: 10px;
     color: white;
+}
+
+.App-intro {
+    background: lightcoral;
+    grid-column: span 3;
+    grid-row: 2;
+}
+
+.App-intro h2 {
+    color: white;
+    justify-self: start;
 }
 
 .App-sidebar {
@@ -21,6 +29,7 @@
     display: relative;
     padding: 10px;
 }
+
 
 .App-sidebar img {
     max-width: 100%;
@@ -36,7 +45,7 @@
 
 .App-navigation {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     cursor: pointer;
 }
