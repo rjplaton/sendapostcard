@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import { Link, Switch, Route } from 'react-router-dom'
-import logo from './images/logo/download.png';
 import './App.css';
 
 import LandingPage from './components/pages/LandingPage/LandingPage.js';
 import Blog from './components/pages/Blog/Blog.js';
 import WriteArticle from './components/pages/WriteArticle/WriteArticle.js';
-import Compose from './components/Compose/Compose.js';
+import Compose from './components/pages/Compose/Compose.js';
+import Postcard from './components/Postcard/Postcard.js';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <nav className="App-navigation">
-          <img src={logo} alt="Some logo"/>
+          <img src="/logo.png" alt="Some logo"/>
           <h1 className="App-title">Send a postcard</h1>
         </nav>
         <div className="App-intro">
@@ -26,6 +26,7 @@ class App extends Component {
 
         <Switch>
           <Route exact path='/compose/' component={Compose}/>
+          <Route exact path='/postcard/' component={Postcard}/>
         </Switch>
 
       </div>
