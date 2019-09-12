@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css?family=Carter+One|Fredoka+One|Manjari|Roboto&display=swap');
+
+.Compose {
+    background-image: url("/wood.jpg");
+    background-size: cover;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 65% auto;
+    grid-template-rows: 75px auto;
+    grid-row-gap: 40px;
+}
+
+.Compose-navigation {
+    grid-column: 1 / span 2;
+    grid-row: 1;
+    color: black;
+    /* background: white; */
+    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75);
+}
+
+.Compose-navigation h1 {
+    font-size: 32pt;
+    margin: auto;
+    font-family: 'Carter One', cursive;
+}
+
+.Compose-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.Compose-cardArea {
+    grid-row: 2;
+    grid-column: 1;
+    padding-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.Compose-controlArea {
+    grid-row: 2;
+    grid-column: 2;
+    margin-bottom: 40px;
+    margin-left: 20px;
+    margin-right: 20px;
+
+}
+
+/* .WriteArticle input,
+.WriteArticle textarea,
+.WriteArticle button {
+  font-size: 24pt;
+  background: none;
+  color: white;
+  padding: 10px;
+  width: 100%;
+  display: block;
+  border: 2px solid white;
+} */
+/* 
+.WriteArticle button {
+  color: black;
+  background: #61dafb;
+} */
