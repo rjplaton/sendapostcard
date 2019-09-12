@@ -7,7 +7,7 @@
     display: grid;
     grid-template-columns: 65% auto;
     grid-template-rows: 75px auto;
-    grid-row-gap: 20px;
+    grid-row-gap: 40px;
 }
 
 .Compose-navigation {
@@ -38,6 +38,15 @@
     padding-top: 40px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.Compose-controlArea {
+    grid-row: 2;
+    grid-column: 2;
+    margin-bottom: 40px;
+    margin-left: 20px;
+    margin-right: 20px;
+
 }
 
 /* .WriteArticle input,
