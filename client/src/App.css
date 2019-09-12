@@ -1,5 +1,5 @@
 .App {
-    background: linear-gradient(to top, #ff00cc, #333399);
+    background: white;
     min-height: 100vh;
     display: grid;
     grid-template-columns: 1fr minmax(auto, 800px) 1fr;
@@ -10,6 +10,8 @@
 }
 
 .App-navigation {
+    background: blue;
+    grid-column: span 3;
     padding: 10px;
     color: white;
 }
@@ -33,7 +35,6 @@
 }
 
 .App-navigation {
-    grid-column: 2 / span 1;
     display: flex;
     justify-content: space-between;
     align-items: center;

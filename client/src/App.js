@@ -12,18 +12,12 @@ class App extends Component {
     return (
       <div className="App">
         <nav className="App-navigation">
-          <h1 className="App-title">MERN Starter</h1>
-          <Link to="/">Welcome</Link>
-          <Link to="/blog/">Blog</Link>
-          <Link to="/write/">Write Article</Link>
+          <img src="download.png" alt="Icon"/>
+          <h1 className="App-title">Send a postcard</h1>
         </nav>
 
         <div className="App-mainContent">
-          <Switch>
-            <Route exact path='/' component={LandingPage} />
-            <Route exact path='/blog/' component={Blog} />
-            <Route exact path='/write/' component={WriteArticle} />
-          </Switch>
+
         </div>
 
       </div>
