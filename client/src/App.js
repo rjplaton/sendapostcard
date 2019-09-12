@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link, Switch, Route } from 'react-router-dom'
-
+import logo from './images/logo/download.png';
 import './App.css';
 
 import LandingPage from './components/pages/LandingPage/LandingPage.js';
@@ -12,18 +12,15 @@ class App extends Component {
     return (
       <div className="App">
         <nav className="App-navigation">
-          <h1 className="App-title">MERN Starter</h1>
-          <Link to="/">Welcome</Link>
-          <Link to="/blog/">Blog</Link>
-          <Link to="/write/">Write Article</Link>
+          <img src={logo} alt="Some logo"/>
+          <h1 className="App-title">Send a postcard</h1>
         </nav>
+        <div className="App-intro">
+        <h2> Why leave your house to send a postcard? Leave it to us!</h2>
+        </div>
 
         <div className="App-mainContent">
-          <Switch>
-            <Route exact path='/' component={LandingPage} />
-            <Route exact path='/blog/' component={Blog} />
-            <Route exact path='/write/' component={WriteArticle} />
-          </Switch>
+
         </div>
 
       </div>
