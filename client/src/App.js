@@ -6,6 +6,7 @@ import './App.css';
 import LandingPage from './components/pages/LandingPage/LandingPage.js';
 import Blog from './components/pages/Blog/Blog.js';
 import WriteArticle from './components/pages/WriteArticle/WriteArticle.js';
+import Compose from './components/Compose/Compose.js';
 
 class App extends Component {
   render() {
@@ -22,6 +23,10 @@ class App extends Component {
         <div className="App-mainContent">
 
         </div>
+
+        <Switch>
+          <Route exact path='/compose/' component={Compose}/>
+        </Switch>
 
       </div>
     );
