@@ -2,7 +2,7 @@
     background: white;
     min-height: 100vh;
     display: grid;
-    grid-template-columns: 1fr minmax(auto, 800px) 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 100px auto;
     align-items: stretch;
 }
@@ -23,6 +23,8 @@
     color: white;
     justify-self: start;
 }
+
+
 
 .App-sidebar {
     background: rgba(255, 255, 255, 0.9);
