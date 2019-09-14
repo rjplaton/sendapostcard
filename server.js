@@ -8,6 +8,7 @@ app.use(express.json());
 /// YOUR ROUTES GO HERE!
 
 
+
 /////////////////////////////////////////////
 
 // Totally insecure backend routes below, good only for rapid prototyping
@@ -113,8 +114,25 @@ app.delete('/api/mongodb/:collectionName/', (request, response) => {
 });
 
 
+//Stripe Payment Endpoint
 
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
+app.use(require("body-parser").text());
+
+app.post("/charge", async (req, res) => {
+  try {
+    let {status} = await stripe.charges.create({
+      amount: 200,
+      currency: "usd",
+      description: "An example charge",
+      source: req.body
+    });
+    res.json({status});
+  } catch (err) {
+    res.status(500).end();
+  }
+});
 
 
 

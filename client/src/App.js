@@ -6,7 +6,10 @@ import './App.css';
 import LandingPage from './components/pages/LandingPage/LandingPage.js';
 import Blog from './components/pages/Blog/Blog.js';
 import WriteArticle from './components/pages/WriteArticle/WriteArticle.js';
-import Checkout from './components/stripe-checkout/stripe-checkout.js';
+
+
+import StripeCheckout from './components/StripeCheckout/StripeCheckout.js';
+import {Elements, StripeProvider} from 'react-stripe-elements';
 
 class App extends Component {
   render() {
@@ -25,8 +28,14 @@ class App extends Component {
             <Route exact path='/blog/' component={Blog} />
             <Route exact path='/write/' component={WriteArticle} />
           </Switch>
-                  <Checkout
-        />
+              <StripeProvider apiKey="pk_test_REGGeT4oO3tm4dsgHEo4Uisr00bsqbcD1w">
+                <div className="example">
+                  <h1>React Stripe Elements Example</h1>
+                  <Elements>
+                    <StripeCheckout />
+                  </Elements>
+                </div>
+              </StripeProvider>
         </div>
 
       </div>
