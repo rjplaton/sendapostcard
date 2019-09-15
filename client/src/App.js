@@ -60,7 +60,7 @@ class App extends Component {
             <Route exact path='/write/' component={WriteArticle} />
           </Switch>
               
-         //example of Stripe component using public test key
+         {//example of Stripe component using public test key
               //<StripeProvider apiKey="pk_test_REGGeT4oO3tm4dsgHEo4Uisr00bsqbcD1w">
               // <div className="example">
                // <h1>React Stripe Elements Example</h1>
@@ -69,6 +69,7 @@ class App extends Component {
               //  </Elements>
              // </div>
               // </StripeProvider>
+            }
 
         </div>
 
