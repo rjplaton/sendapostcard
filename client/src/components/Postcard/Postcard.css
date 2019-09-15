@@ -1,0 +1,77 @@
+.Postcard {
+    background-color: transparent;
+    perspective: 3000px;
+    height: 6in;
+    width: 9in;    
+}
+
+.Postcard-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75);
+}
+
+.Postcard-isFlipped {
+    transform: rotateY(180deg);
+}
+
+.Postcard-front, .Postcard-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+
+.Postcard-front {
+    color: black;
+    /* background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%); */
+}
+
+.Postcard-front img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.Postcard-back {
+    transform: rotateY(180deg);
+    display: grid;
+    grid-template-columns: 50% 50%;
+    background: white;
+    font-family: 'Roboto', sans-serif;
+}
+
+.Postcard-message {
+    grid-column: 1;
+    font-size: 24px;
+    padding-left: 2.5em;
+    padding-top: 2.5em;
+}
+
+.Postcard-addressSide {
+    grid-column: 2;
+    display: grid;
+    grid-template-rows: 4.5em auto;
+    font-size: 18px;
+    text-align: center;
+    border-left: 2px solid black;
+    margin: 2em;
+}
+
+.Postcard-postage {
+    grid-row: 1;
+    justify-self: end;
+    height: 4.5em;
+    width: 4.5em;
+    border: 1px solid black;
+    font-size: 14px;
+}
+
+.Postcard-address {
+    grid-row: 2;
+    padding-top: 6em;
+    line-height: 2;
+}
