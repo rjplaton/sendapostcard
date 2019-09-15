@@ -129,11 +129,18 @@ app.post("/charge", async (req, res) => {
       source: req.body
     });
     res.json({status});
+    //function to store charge id to the appropriate user's postcard
+
+    //function to kick off lob api request
+    
   } catch (err) {
     res.status(500).end();
   }
 });
 
+//Mongo DB Function to store "saved card" in a collection
+
+//MongoDB function to add the Stripe Charge ID
 
 
 /////////////////////////////////////////////
