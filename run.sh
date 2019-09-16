@@ -13,7 +13,7 @@ fi
 
 # Get the back-end running in the background
 #./node_modules/.bin/nodemon server.js &
-exec ./node_modules/.bin/nodemon server.js
+exec ./node_modules/.bin/nodemon server.js &
 
 # Go into client directory and get frontend running
 cd client/

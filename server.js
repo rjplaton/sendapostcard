@@ -3,6 +3,7 @@ const express = require('express');
 const MongoClient = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectId;
 const app = express();
+//const lob_API = require('lob_api');
 app.use(express.json());
 
 /// YOUR ROUTES GO HERE!
@@ -112,6 +113,26 @@ app.delete('/api/mongodb/:collectionName/', (request, response) => {
       }
     })
 });
+
+
+// POST for saving a newly created postcard
+app.post('/api/mongodb/sendapostcard/:collectionName/', (request, response) => {
+  const collectionName = request.params.collectionName;
+  const data = request.body;
+
+  db.collection(collectionName)
+    .insert(data, (err, results) => {
+      // Got data back.. send to client
+      if (err) throw err;
+
+      response.json({
+        'success': true,
+        'results': results,
+      });
+      //log_API.create_postcard(id);
+    });
+});
+
 
 
 //Stripe Payment Endpoint
