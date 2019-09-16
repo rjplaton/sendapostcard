@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import './instruction.css';
+import './Instruction.css';
 
-
-class Character extends Component {
+class Instruction extends Component {
   render() {
     return (
       <div className="Instruction">
@@ -14,4 +13,4 @@ class Character extends Component {
   }
 }
 
-export default Character;
+export default Instruction;

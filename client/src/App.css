@@ -3,7 +3,7 @@
     min-height: 100vh;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 100px auto;
+    grid-template-rows: 100px 50px auto;
     align-items: stretch;
 }
 
@@ -23,7 +23,6 @@
     color: white;
     justify-self: start;
 }
-
 
 
 .App-sidebar {
@@ -61,7 +60,7 @@
 }
 
 .App-mainContent {
-    grid-column: 2;
+    grid-column: span 3;
 }
 
 
