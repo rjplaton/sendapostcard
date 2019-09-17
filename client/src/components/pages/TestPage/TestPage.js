@@ -37,6 +37,7 @@ class TestPage extends Component {
       cardBack_text: this.state.cardBack_text,
       status: "saved",
       stripeChargeId: null,
+      createDate: new Date(),
     };
 
     fetch('/api/mongodb/sendapostcard/postcards', {

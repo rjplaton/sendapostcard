@@ -3,7 +3,7 @@ const express = require('express');
 const MongoClient = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectId;
 const app = express();
-//const lob_API = require('lob_api');
+const lob_API = require('./lob_api');
 app.use(express.json());
 
 /// YOUR ROUTES GO HERE!
@@ -120,6 +120,7 @@ app.post('/api/mongodb/sendapostcard/:collectionName/', (request, response) => {
   const collectionName = request.params.collectionName;
   const data = request.body;
 
+  //Mongo DB Function to store "saved card" in a collectionName
   db.collection(collectionName)
     .insert(data, (err, results) => {
       // Got data back.. send to client
@@ -129,7 +130,13 @@ app.post('/api/mongodb/sendapostcard/:collectionName/', (request, response) => {
         'success': true,
         'results': results,
       });
-      //log_API.create_postcard(id);
+      
+      //get the _id from the resulting db insert and pass to a call to the lob_api
+      //this should be moved to the code that will prompt user to make Stripe payment and, upon successfull payment, will cause creation of postcard using Lob API
+      const card_id = results.ops[0]._id;
+      console.log('card_id ->', card_id);
+      send_postcard(card_id);
+      
     });
 });
 
@@ -159,7 +166,58 @@ app.post("/charge", async (req, res) => {
   }
 });
 
-//Mongo DB Function to store "saved card" in a collection
+//function to kick off lob api request
+function send_postcard (card_id) {
+  const fs = require('fs');
+
+  const api_key = process.env.LOB_API_KEY;
+  console.log('api_key is =>', api_key);
+
+  const Lob = require('lob')(api_key);
+
+  const card_front = fs.readFileSync(`${__dirname}/lob_postcard_html/sample_card_front.html`).toString();
+  const card_back = fs.readFileSync(`${__dirname}/lob_postcard_html/sample_card_back.html`).toString();
+
+  // Create the address
+  const mailing_address = {
+    name: 'Robin Joseph',
+    email: 'test@gmail.com',
+    phone: '123456789',
+    address_line1: '123 Test Street',
+    address_line2: 'Unit 199',
+    address_city: 'Chicago',
+    address_state: 'IL',
+    address_zip: '60012',
+    address_country: 'US'
+  };
+  
+  //
+  db.collection('postcards')
+    .find({_id: ObjectId(card_id)})
+    .toArray((err, results) => {
+      // Got data back.. send to client
+      if (err) throw err;
+      console.log('found db record to use for sending postcard to Lob ->',results);
+    });
+
+
+  // Send Postcard
+  Lob.postcards.create({
+    description: 'Sample Postcard :(',
+    to: mailing_address,
+    front: card_front,
+    back: card_back,
+    merge_variables: {
+      insulting_name: 'Jackass'
+    }
+  }, (err, postcard) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log('The Lob API responded with this postcard object:', postcard);
+    }
+  });
+}
 
 //MongoDB function to add the Stripe Charge ID
 
@@ -216,3 +274,4 @@ MongoClient.connect(MONGODB_URL, {useNewUrlParser: true}, (err, client) => {
     `);
   })
 });
+
