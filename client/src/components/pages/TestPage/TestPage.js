@@ -3,17 +3,15 @@ import './TestPage.css';
 
 class TestPage extends Component {
   state = {
-    "name": "", //"Robin Joseph",
-    "address_line1": "", //"123 Test Street",
-    "address_line2": "", //"Unit 199",
-    "address_city": "", //"Chicago",
-    "address_state":"", //"IL",
-    "address_zip": "", //"60012",
-    
-    "cardBack_text": "",
-    
-    title: '',
-    text: '',
+    "name": "Donald Duck",
+    "address_line1": "123 Acme Ave.",
+    "address_line2": "Unit 199",
+    "address_city": "Tinseltown",
+    "address_state": "CA",
+    "address_zip": "54321",
+    "cardBack_text": "Sample cardback message of hope and inspiration.",
+    //
+    "front_template_id": "tmpl_6b35f867e521b41"
   }
 
   
@@ -35,9 +33,12 @@ class TestPage extends Component {
         address_country: "US"
       },
       cardBack_text: this.state.cardBack_text,
+      frontTemplateId: this.state.front_template_id,
       status: "saved",
       stripeChargeId: null,
+      lobApiId: null,
       createDate: new Date(),
+      lastModifiedDate: null,
     };
 
     fetch('/api/mongodb/sendapostcard/postcards', {
