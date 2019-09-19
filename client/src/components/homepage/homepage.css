@@ -1,0 +1,35 @@
+.Homepage {
+    background: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 500px 300px 700px;
+}
+
+.Homepage-intro{
+    grid-column: span 3;
+    grid-row: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-image: url(../../images/other/intro1.jpg);
+    background-size: 100vw 100vh;
+    background-repeat: no-repeat;
+}
+
+.Homepage-intro h1{
+   grid-column: 1;
+   grid-row: 2;
+   color: white;
+}
+
+.Homepage-instruction{
+    grid-row: 2;
+    grid-column: span 3;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 100px 200px ;
+    color: #003262;
+}
+
+.Homepage-instruction h1{
+    text-align: center;
+    grid-column: span 3;
+}

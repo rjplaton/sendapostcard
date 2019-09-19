@@ -1,17 +1,22 @@
-img {
+.Instruction {
+    text-align: center;
+}
+
+.Instruction img {
     height: 150px;
     width: 200px;
     margin: 20px;
 }
 
-h3 {
-    color: #33FFAF;
+.Instruction h3 {
+    color: #003262;
     font-family: 'Chilanka', cursive;
-    font-size: 2em;
+    font-size: 1.5em;
     margin: 10px;
 }
 
-h4 {
-    font-size: 1.5em;
+.Instruction h4 {
+    font-size: 1em;
     margin: 10px;
+    color: #FDB515;
 }
