@@ -5,8 +5,8 @@ import pickacard from '../../images/other/pickacard.jpg';
 import message from '../../images/other/message.png';
 import address from '../../images/other/address.png';
 import Instruction from '../Instruction/Instruction.js';
-import Header from '../Header/Header.js';
-import './Homepage.css';
+import Header from '../header/header.js';
+import './homepage.css';
 
 class Homepage extends Component {
   render() {
