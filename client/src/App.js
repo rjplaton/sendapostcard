@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
 import { Link, Switch, Route } from 'react-router-dom'
 
-import logo from './images/logo/download.png';
-import intro from './images/other/intro.jpg';
-import pickacard from './images/other/pickacard.jpg';
-import message from './images/other/message.png';
-import address from './images/other/address.png';
+//import intro from './images/other/intro.jpg';
+
 import './App.css';
 import Header from './components/Header/Header.js'
-import LandingPage from './components/pages/LandingPage/LandingPage.js';
-import Blog from './components/pages/Blog/Blog.js';
-import WriteArticle from './components/pages/WriteArticle/WriteArticle.js';
 
 import Homepage from './components/Homepage/Homepage.js';
 import TestPage from './components/pages/TestPage/TestPage.js';
@@ -34,8 +28,6 @@ class App extends Component {
 
           <Switch>
             <Route exact path='/' component={Homepage} />
-            <Route exact path='/blog/' component={Blog} />
-            <Route exact path='/write/' component={WriteArticle} />
             <Route exact path='/compose/' component={Compose} />
             <Route exact path='/postcard/' component={Postcard} />
             <Route exact path='/testpage/' component={TestPage} />
@@ -59,8 +51,6 @@ class App extends Component {
             <Link to="/">Home</Link>
             <Link to="/about/">About</Link>
             <Link to="/term/">Terms & Privacy</Link>
-            <Link to="/">Welcome</Link>
-            <Link to="/blog/">Blog</Link>
             <Link to="/write/">Write Article</Link>
             <Link to="/compose/">Compose</Link>
             <Link to="/postcard/">PostCard</Link>
