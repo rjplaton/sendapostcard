@@ -2,7 +2,7 @@
 .WriteArticle textarea,
 .WriteArticle button {
   font-size: 24pt;
-  background: none;
+  background: black;
   color: white;
   padding: 10px;
   width: 100%;

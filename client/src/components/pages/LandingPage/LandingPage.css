@@ -1,6 +1,10 @@
 .LandingPage {
   text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: stretch;
 }
+
 
 .LandingPage-header {
   background-color: #282c34;
@@ -11,6 +15,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  grid-column: span 3;
 }
 
 .LandingPage a {
