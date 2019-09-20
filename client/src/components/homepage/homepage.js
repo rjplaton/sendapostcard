@@ -33,6 +33,7 @@ class Homepage extends Component {
              />
          </div>
          <div className="Homepage-template-display">
+         
          </div>
       </div>
     );
