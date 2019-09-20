@@ -1,0 +1,40 @@
+.Homepage {
+    background: white;
+    display: grid;
+    grid-template-columns: 100px 1fr 1fr 1fr 100px;
+    grid-template-rows: 400px 400px 700px;
+}
+
+.Homepage-intro{
+    grid-column: span 5;
+    grid-row: 1;
+    display: grid;
+    grid-template-columns: 100px 1fr 1fr 100px;
+    background: #49beb7;
+    background-size: auto;
+    background-repeat: no-repeat;
+    opacity: 0.5;
+}
+
+.Homepage-intro h1{
+   grid-column: 2;
+   grid-row: 2;
+   color: white;
+}
+
+.Homepage-instruction{
+    grid-row: 2;
+    grid-column: span 5;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
+    grid-template-rows: 70px 300px ;
+    color: #003262;
+}
+
+.Homepage-instruction h1{
+    grid-column: span 3;
+    text-align: center;
+}
+
+.Homepage-template-display{
+}
