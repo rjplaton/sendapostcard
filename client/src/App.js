@@ -4,9 +4,9 @@ import { Link, Switch, Route } from 'react-router-dom'
 //import intro from './images/other/intro.jpg';
 
 import './App.css';
-import Header from './components/Header/Header.js'
+import Header from './components/header/header.js'
 
-import Homepage from './components/Homepage/Homepage.js';
+import Homepage from './components/homepage/homepage.js';
 import TestPage from './components/pages/TestPage/TestPage.js';
 
 //importing needs for Stripe - might be possible to move this to a separate "page" component later
