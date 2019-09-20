@@ -1,0 +1,17 @@
+img {
+    height: 150px;
+    width: 200px;
+    margin: 20px;
+}
+
+h3 {
+    color: #33FFAF;
+    font-family: 'Chilanka', cursive;
+    font-size: 2em;
+    margin: 10px;
+}
+
+h4 {
+    font-size: 1.5em;
+    margin: 10px;
+}
