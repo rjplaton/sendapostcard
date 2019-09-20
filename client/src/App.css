@@ -3,13 +3,8 @@
     min-height: 100vh;
     min-width: 100vw;
     display: grid;
-<<<<<<< HEAD
-    grid-template-rows: 100px 1fr 100px;
-=======
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 100px 50px auto;
-    align-items: stretch;
->>>>>>> 4d9d0ce063bf84caa154f86453cb63ce4997f0e2
+    grid-template-rows: 60px auto 100px;
 }
 
 .App-navigation {
@@ -37,15 +32,13 @@
 /*    color: #003262;*/
 /*}*/
 
-<<<<<<< HEAD
 
-=======
 .App-sidebar {
     background: rgba(255, 255, 255, 0.9);
     display: relative;
     padding: 10px;
 }
->>>>>>> 4d9d0ce063bf84caa154f86453cb63ce4997f0e2
+
 
 /*.App-sidebar {*/
 /*    background: rgba(255, 255, 255, 0.9);*/
@@ -82,11 +75,19 @@
 /*}*/
 
 .App-mainContent {
-<<<<<<< HEAD
-    grid-row: 2;
-=======
+
     grid-column: span 3;
->>>>>>> 4d9d0ce063bf84caa154f86453cb63ce4997f0e2
 }
 
+.App-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    grid-column: span 3;
+    text-align: center;
+}
+
+.App-footer nav a{
+    padding: 5px;
+}
 

@@ -2,19 +2,21 @@
 .Header{
     background: #ff502f;
     color: #ebefd0;
-    display:grid;
-    grid-template-columns: 100px 1fr 1fr 100px;
-    grid-template-rows: 100px;
+    display:flex;
+    grid-column: span 3;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
 }
 
 .Header img{
-    height: 120px;
-    width: 110px;
-    grid-column: 2;
-    align-self: center;
+    height: 55px;
+    width: 52px;
+    padding: 3px;
 }
 
 .Header-title {
     font-size: 2.5em;
     align-self: center;
+    padding-left: 10px;
 }

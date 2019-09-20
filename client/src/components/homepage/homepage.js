@@ -4,9 +4,10 @@ import intro from '../../images/other/intro.jpg';
 import pickacard from '../../images/other/pickacard.jpg';
 import message from '../../images/other/message.png';
 import address from '../../images/other/address.png';
-import Instruction from '../instruction/instruction.js';
-import Header from '../header/header.js';
-import './homepage.css';
+import Instruction from '../Instruction/Instruction.js';
+import Header from '../Header/Header.js';
+import './Homepage.css';
+
 class Homepage extends Component {
   render() {
     return (
@@ -15,7 +16,6 @@ class Homepage extends Component {
             <h1> Something goes here! </h1>
         </div>
         <div className="Homepage-instruction">
-            <h1> How to use our site </h1>
             <Instruction
                 image={pickacard}
                 todo="Pick a card"
@@ -33,7 +33,7 @@ class Homepage extends Component {
              />
          </div>
          <div className="Homepage-template-display">
-         
+         <h1>The templates go here via template components.</h1>
          </div>
       </div>
     );

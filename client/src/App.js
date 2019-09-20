@@ -7,12 +7,12 @@ import pickacard from './images/other/pickacard.jpg';
 import message from './images/other/message.png';
 import address from './images/other/address.png';
 import './App.css';
-import Header from './components/header/header.js'
+import Header from './components/Header/Header.js'
 import LandingPage from './components/pages/LandingPage/LandingPage.js';
 import Blog from './components/pages/Blog/Blog.js';
 import WriteArticle from './components/pages/WriteArticle/WriteArticle.js';
 
-import Homepage from './components/homepage/homepage.js';
+import Homepage from './components/Homepage/Homepage.js';
 import TestPage from './components/pages/TestPage/TestPage.js';
 
 //importing needs for Stripe - might be possible to move this to a separate "page" component later
@@ -28,44 +28,17 @@ class App extends Component {
     return (
       <div className="App">
 
-        <div className="App-navigation">
-            <Header/>
-        </div>
+        <Header />
+        
         <div className="App-mainContent">
+
           <Switch>
             <Route exact path='/' component={Homepage} />
-          </Switch>
-        </div>
-        <div className="App-footer">
-          <Link to="/">Home</Link>
-          <Link to="/about/">About</Link>
-          <Link to="/term/">Terms & Privacy</Link>
-
-        <nav className="App-navigation">
-          <img src="/logo.png" alt="Some logo"/>
-          <h1 className="App-title">Send a postcard</h1>
-          <Link to="/">Welcome</Link>
-          <Link to="/blog/">Blog</Link>
-          <Link to="/write/">Write Article</Link>
-          <Link to="/compose/">Compose</Link>
-          <Link to="/postcard/">PostCard</Link>
-          <Link to="/testpage/">TestPage</Link>
-        </nav>
-      
-        <div className="App-intro">
-            <h2> Why leave your house to send a postcard? Leave it to us!</h2>
-        </div>
-        
-
-        <div className="App-mainContent">
-
-          <Switch>
-            <Route exact path='/' component={LandingPage} />
             <Route exact path='/blog/' component={Blog} />
             <Route exact path='/write/' component={WriteArticle} />
-            <Route exact path='/compose/' component={Compose}/>
-            <Route exact path='/postcard/' component={Postcard}/>
-            <Route exact path='/testpage/' component={TestPage}/>
+            <Route exact path='/compose/' component={Compose} />
+            <Route exact path='/postcard/' component={Postcard} />
+            <Route exact path='/testpage/' component={TestPage} />
           </Switch>
         
          {//example of Stripe component using public test key
@@ -80,6 +53,22 @@ class App extends Component {
             }
 
         </div>
+        
+        <div className="App-footer">
+          <nav>
+            <Link to="/">Home</Link>
+            <Link to="/about/">About</Link>
+            <Link to="/term/">Terms & Privacy</Link>
+            <Link to="/">Welcome</Link>
+            <Link to="/blog/">Blog</Link>
+            <Link to="/write/">Write Article</Link>
+            <Link to="/compose/">Compose</Link>
+            <Link to="/postcard/">PostCard</Link>
+            <Link to="/testpage/">TestPage</Link>
+          </nav>
+        </div>
+
+      
       </div>
 
     );

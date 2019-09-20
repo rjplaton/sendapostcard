@@ -2,7 +2,7 @@
     background: white;
     display: grid;
     grid-template-columns: 100px 1fr 1fr 1fr 100px;
-    grid-template-rows: 400px 400px 700px;
+    grid-template-rows: 300px auto auto;
 }
 
 .Homepage-intro{
@@ -37,4 +37,6 @@
 }
 
 .Homepage-template-display{
+    grid-column: span 5;
+    text-align: center;
 }
