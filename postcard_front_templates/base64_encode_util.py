@@ -1,8 +1,8 @@
 import base64
 
-with open("./arthur_fist.jpg", "rb") as f:
-    encoded = base64.b64encode(f.read())
-    print(encoded)
+#with open("./arthur_fist.jpg", "rb") as f:
+#    encoded = base64.b64encode(f.read())
+#    print(encoded)
 
 #with open("./good_thinking.jpg", "rb") as f:
 #    encoded = base64.b64encode(f.read())
