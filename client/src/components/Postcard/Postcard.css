@@ -14,7 +14,7 @@
     box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75);
 }
 
-.Postcard-isFlipped {
+.Postcard-showBack {
     transform: rotateY(180deg);
 }
 
@@ -34,6 +34,7 @@
     height: 100%;
     width: 100%;
     object-fit: cover;
+    margin: 0px;
 }
 
 .Postcard-back {

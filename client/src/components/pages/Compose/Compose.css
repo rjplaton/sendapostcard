@@ -6,18 +6,18 @@
     min-height: 100vh;
     display: grid;
     grid-template-columns: 65% auto;
-    grid-template-rows: 75px auto;
+    /* grid-template-rows: 75px auto; */
     grid-row-gap: 40px;
 }
 
-.Compose-navigation {
-    grid-column: 1 / span 2;
-    grid-row: 1;
-    color: black;
+/* .Compose-navigation { */
+    /* grid-column: 1 / span 2; */
+    /* grid-row: 1; */
+    /* color: black; */
     /* background: white; */
-    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
-    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75);
-}
+    /* background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%); */
+    /* box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75); */
+/* } */
 
 .Compose-navigation h1 {
     font-size: 32pt;
@@ -33,7 +33,7 @@
 }
 
 .Compose-cardArea {
-    grid-row: 2;
+    /* grid-row: 2; */
     grid-column: 1;
     padding-top: 40px;
     margin-left: auto;
@@ -41,11 +41,12 @@
 }
 
 .Compose-controlArea {
-    grid-row: 2;
+    /* grid-row: 2; */
     grid-column: 2;
     margin-bottom: 40px;
     margin-left: 20px;
     margin-right: 20px;
+    margin-top: 20px;
 
 }
 
