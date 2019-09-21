@@ -19,17 +19,25 @@
     font-size: 26px;
     /* padding-left: 15px; */
     /* padding-right: 110px; */
-    /* display: flex;
-    flex-direction: row; */
-    /* justify-content: space-between; */
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
     /* text-align: center; */
     /* justify-self: center; */
+}
+
+.MessageFormCard-writeButton svg {
+    height: 35px;
+    width: 35px;
+    margin: 7.5px;
 }
 
 .MessageFormCard-write {
     text-align: center;
     color: white;
     margin: .2em;
+    width: 82%;
+    cursor: default;
 }
 
 .MessageFormCard-form {
@@ -97,9 +105,4 @@
     padding-left: 25px;
     padding-right: 25px;
     border-radius: 4px;
-}
-
-.MessageFormCard-checkoutButton p {
-    margin: .2em;
-    text-align: center;
 }
