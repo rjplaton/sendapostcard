@@ -48,7 +48,7 @@ class Compose extends Component {
 
         this.setState({formData: formData});
         
-        console.log(this.state.formData);
+        // console.log(this.state.formData);
     }
 
     render() {
