@@ -24,10 +24,11 @@
 
 .Homepage-instruction{
     grid-row: 2;
-    grid-column: span 5;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr ;
-    grid-template-rows: 70px 300px ;
+    grid-column-start: 2;
+    grid-column-end: 5;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     color: #003262;
 }
 
