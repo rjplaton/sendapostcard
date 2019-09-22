@@ -3,6 +3,7 @@ import './TestPage.css';
 import StripeCheckout from '../../../components/StripeCheckout/StripeCheckout.js';
 import {Elements, StripeProvider} from 'react-stripe-elements';
 
+
 class TestPage extends Component {
   state = {
     "name": "Donald Duck",
@@ -62,7 +63,6 @@ class TestPage extends Component {
         //this.props.history.push('/');
       });
   }
-
 
   render() {
     const hasCardId = this.state.card_id

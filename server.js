@@ -256,13 +256,49 @@ function send_postcard (card_id) {
               }
             );
 
-          //Is this where we redirect to order confirmation page?
-
         }
       });
     });
 
-}
+};
+
+//get LobApiId using a card_id
+app.get('/getLobApiId/:card_id', (req, res) => {
+  console.log('card id:', req.params.card_id)
+  db.collection('postcards')
+    .find({_id: ObjectId(req.params.card_id)})
+    .toArray((err, card_DB_Obj) => {
+      if (err) throw err;
+      console.log('Lob Api Id:', card_DB_Obj[0].lobApiId);
+      res.json({
+      lobApiId: card_DB_Obj[0].lobApiId,
+        })
+    });
+
+
+});
+
+
+//thank you page route
+app.get('/thank-you/:lobApiId', (request, response) => {
+  console.log('thank you route working');
+  console.log(request.params.lobApiId);
+
+  //get expected delivery date from Lob Api
+  const api_key = process.env.LOB_API_KEY;
+  const Lob = require('lob')(api_key);
+  Lob.postcards.retrieve(request.params.lobApiId, function (err, res) {
+    console.log(err, res);
+    console.log('lob working')
+    response.json({
+      deliveryDate: res.expected_delivery_date,
+      lobApiId: request.params.lobApiId,
+      })
+  });
+
+});
+
+
 
 
 /////////////////////////////////////////////

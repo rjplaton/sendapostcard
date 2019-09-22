@@ -8,6 +8,7 @@ import Header from './components/header/header.js'
 
 import Homepage from './components/homepage/homepage.js';
 import TestPage from './components/pages/TestPage/TestPage.js';
+import ThankYou from './components/pages/ThankYou/ThankYou.js';
 
 //importing needs for Stripe - might be possible to move this to a separate "page" component later
 import StripeCheckout from './components/StripeCheckout/StripeCheckout.js';
@@ -31,6 +32,7 @@ class App extends Component {
             <Route exact path='/compose/' component={Compose} />
             <Route exact path='/postcard/' component={Postcard} />
             <Route exact path='/testpage/' component={TestPage} />
+            <Route exact path='/thank-you/:lobApiId' component={ThankYou} />
           </Switch>
         
          {//example of Stripe component using public test key
