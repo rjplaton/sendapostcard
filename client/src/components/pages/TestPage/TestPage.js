@@ -53,6 +53,7 @@ class TestPage extends Component {
       .then(response => response.json())
       .then(data => {
         console.log('Got this back', data);
+        
         //set state with returned card id
         this.setState({
           card_id: data.results.insertedIds[0],

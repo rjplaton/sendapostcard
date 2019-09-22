@@ -33,7 +33,7 @@ async submit(ev) {
   render() {
     if (this.state.complete) return <h1>Purchase Complete</h1>;
     if (this.state.error) 
-      return <div><h1>Something went wrong.</h1><p>You were not charged.</p><p>Please try again.</p></div>;
+      return <div><h1>Something went wrong.</h1><p>You were not charged.</p><p>Please refresh the page and try again.</p></div>;
 
     return (
       <div className="checkout">

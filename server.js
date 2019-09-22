@@ -135,7 +135,6 @@ app.post('/api/mongodb/sendapostcard/:collectionName/', (request, response) => {
       const card_id = results.ops[0]._id;
       console.log('card_id ->', card_id);
 
-      //send_postcard(card_id);
 
     });
 });
@@ -157,14 +156,29 @@ app.post("/charge/:card_id", async (req, res) => {
       source: req.body
     });
     res.json(status);
-    console.log(status.id);
-    console.log('card id:')
     //print the card_id - will use this later for function below
-    console.log(req.params.card_id);
+    console.log('card id: ' + req.params.card_id)
+    
+
     //function to store charge id to the appropriate user's postcard
+    const data = {
+            stripeChargeId: status.id,
+          }
+    db.collection('postcards')
+        .updateOne(
+              {_id: ObjectId(req.params.card_id)}, 
+              {$set: data}, 
+              (err, results) => {
+                if (err) throw err;
+                if (results.result.nModified === 1) {
+                  console.log('update db with stripeChargeId -> ' + status.id);
+                }
+              }
+          );
 
     //function to kick off lob api request
-    
+    send_postcard(req.params.card_id);
+
   } catch (err) {
     res.status(500).end();
   }
@@ -241,13 +255,14 @@ function send_postcard (card_id) {
                 }
               }
             );
+
+          //Is this where we redirect to order confirmation page?
+
         }
       });
     });
 
 }
-
-//MongoDB function to add the Stripe Charge ID
 
 
 /////////////////////////////////////////////
