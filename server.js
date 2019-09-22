@@ -134,8 +134,9 @@ app.post('/api/mongodb/sendapostcard/:collectionName/', (request, response) => {
       //this should be moved to the code that will prompt user to make Stripe payment and, upon successfull payment, will cause creation of postcard using Lob API
       const card_id = results.ops[0]._id;
       console.log('card_id ->', card_id);
-      send_postcard(card_id);
-      
+
+      //send_postcard(card_id);
+
     });
 });
 
@@ -147,15 +148,19 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 app.use(require("body-parser").text());
 
-app.post("/charge", async (req, res) => {
+app.post("/charge/:card_id", async (req, res) => {
   try {
-    let {status} = await stripe.charges.create({
+    let status = await stripe.charges.create({
       amount: 200,
       currency: "usd",
       description: "An example charge",
       source: req.body
     });
-    res.json({status});
+    res.json(status);
+    console.log(status.id);
+    console.log('card id:')
+    //print the card_id - will use this later for function below
+    console.log(req.params.card_id);
     //function to store charge id to the appropriate user's postcard
 
     //function to kick off lob api request
@@ -164,6 +169,8 @@ app.post("/charge", async (req, res) => {
     res.status(500).end();
   }
 });
+
+
 
 //function to kick off lob api request
 function send_postcard (card_id) {
