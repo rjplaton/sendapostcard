@@ -26,8 +26,15 @@ class StripeCheckout extends Component {
       if (response.ok) {
         console.log("Purchase Complete!");
         this.setState({complete: true});
+        
         console.log('Fetching lob api id');
-        fetch('/getLobApiId/' + this.props.card_id)
+        
+        //hardcoding a delay 
+        //this should be updated to be more precise 
+        //i.e. only happen when the server.js send_postcard finishes successfully
+        setTimeout(
+          function() {
+            fetch('/getLobApiId/' + this.props.card_id)
             .then(response => response.json())
             .then(data => {
             console.log('Got data back', data);
@@ -35,6 +42,11 @@ class StripeCheckout extends Component {
               lobApiId: data.lobApiId,
             })
           })
+
+        }.bind(this),
+        5000
+        );
+
       } else {
         this.setState({error: true})
         console.log("Charge failed.")
@@ -43,7 +55,7 @@ class StripeCheckout extends Component {
 
 
   render() {
-    if (this.state.complete) return <h1>{this.state.lobApiId} </h1>;
+    if (this.state.lobApiId) return <Redirect to={'/thank-you/' + this.state.lobApiId} />;
     if (this.state.error) 
       return <div><h1>Something went wrong.</h1><p>You were not charged.</p><p>Please refresh the page and try again.</p></div>;
 

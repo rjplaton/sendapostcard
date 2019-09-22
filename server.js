@@ -255,6 +255,7 @@ function send_postcard (card_id) {
                 }
               }
             );
+
         }
       });
     });
