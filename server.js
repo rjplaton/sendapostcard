@@ -134,8 +134,8 @@ app.post('/api/mongodb/sendapostcard/:collectionName/', (request, response) => {
       //this should be moved to the code that will prompt user to make Stripe payment and, upon successfull payment, will cause creation of postcard using Lob API
       const card_id = results.ops[0]._id;
       console.log('card_id ->', card_id);
-      send_postcard(card_id);
-      
+
+
     });
 });
 
@@ -147,23 +147,44 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 app.use(require("body-parser").text());
 
-app.post("/charge", async (req, res) => {
+app.post("/charge/:card_id", async (req, res) => {
   try {
-    let {status} = await stripe.charges.create({
+    let status = await stripe.charges.create({
       amount: 200,
       currency: "usd",
       description: "An example charge",
       source: req.body
     });
-    res.json({status});
+    res.json(status);
+    //print the card_id - will use this later for function below
+    console.log('card id: ' + req.params.card_id)
+    
+
     //function to store charge id to the appropriate user's postcard
+    const data = {
+            stripeChargeId: status.id,
+          }
+    db.collection('postcards')
+        .updateOne(
+              {_id: ObjectId(req.params.card_id)}, 
+              {$set: data}, 
+              (err, results) => {
+                if (err) throw err;
+                if (results.result.nModified === 1) {
+                  console.log('update db with stripeChargeId -> ' + status.id);
+                }
+              }
+          );
 
     //function to kick off lob api request
-    
+    send_postcard(req.params.card_id);
+
   } catch (err) {
     res.status(500).end();
   }
 });
+
+
 
 //function to kick off lob api request
 function send_postcard (card_id) {
@@ -234,13 +255,14 @@ function send_postcard (card_id) {
                 }
               }
             );
+
+          //Is this where we redirect to order confirmation page?
+
         }
       });
     });
 
 }
-
-//MongoDB function to add the Stripe Charge ID
 
 
 /////////////////////////////////////////////
