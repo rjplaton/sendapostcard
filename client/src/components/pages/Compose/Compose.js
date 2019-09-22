@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Compose.css';
 import Postcard from '../../Postcard/Postcard.js';
-import MessageFormCard from '../../MessageFormCard/MessageFormCard.js';
+import FormCard from '../../FormCard/FormCard.js';
 
 class Compose extends Component {
     state = {
@@ -16,7 +16,18 @@ class Compose extends Component {
             recCity: "New York",
             recState: "NY",
             recZip: "00000",
-        }
+        },
+        showCheckout: false,
+    }
+
+    checkout = (ev) => {
+        console.log("show checkout form");
+        this.setState({showCheckout: true});
+    }
+
+    showMessageForm = () => {
+        console.log("show message form")
+        this.setState({showCheckout: false});
     }
 
     flipPostCard = () => {
@@ -67,12 +78,15 @@ class Compose extends Component {
                 </div>
 
                 <div className="Compose-controlArea">
-                    <MessageFormCard 
+                    <FormCard 
                         formData={this.state.formData}
                         flipPostCard={this.flipPostCard}
                         forceFlipToBack={this.forceFlipToBack}
                         handleMessageChange={this.handleMessageChange}
                         handleFormChange={this.handleFormChange}
+                        showCheckout={this.state.showCheckout}
+                        checkout={this.checkout}
+                        showMessageForm={this.showMessageForm}
                     />
                 </div>
             </div>

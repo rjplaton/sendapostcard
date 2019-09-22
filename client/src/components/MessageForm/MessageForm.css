@@ -1,0 +1,77 @@
+.MessageForm {
+    grid-row: 2;
+    padding: 15px;
+}
+
+.MessageForm form {
+    height: 92%;
+}
+
+.MessageForm-flex{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.MessageForm span {
+    display: flex;
+    flex-direction: column;
+}
+
+.MessageForm small {
+    /* margin-left: 10px; */
+    color: grey;
+}
+
+.MessageForm textarea {
+    /* background: #F0F5FB; */
+    background: rgb(195, 200, 207);
+    resize: none;
+    border: none;
+    height: 160px;
+    padding: 12px 20px;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.MessageForm input {
+    background: rgb(195, 200, 207);
+    border: none;
+    padding: 8px;
+    font-size: 16px;
+}
+
+.MessageForm label {
+    /* color: #49beb7; */
+    /* font-family: 'Futura'; */
+    color: black;
+}
+
+.MessageForm h4 {
+    /* color: #49beb7; */
+    font-family: 'Futura';
+    font-size: 22px;
+    margin: 0px;
+}
+
+.MessageForm-stateZipRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.MessageForm-checkoutButtonArea {
+    text-align: center;
+}
+
+.MessageForm-checkoutButtonArea button {
+    background: #ff502f;
+    color: white;
+    font-family: 'Carter One', cursive;
+    font-size: 26px;
+    margin-top: 12px;
+    border-radius: 4px;
+    width: 42%;
+}
