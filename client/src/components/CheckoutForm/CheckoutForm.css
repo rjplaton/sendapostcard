@@ -1,0 +1,77 @@
+.CheckoutForm {
+    grid-row: 2;
+    padding: 15px;
+}
+
+.CheckoutForm form {
+    height: 92%;
+}
+
+.CheckoutForm-flex{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.CheckoutForm span {
+    display: flex;
+    flex-direction: column;
+}
+
+.CheckoutForm small {
+    /* margin-left: 10px; */
+    color: grey;
+}
+
+.CheckoutForm textarea {
+    /* background: #F0F5FB; */
+    background: rgb(195, 200, 207);
+    resize: none;
+    border: none;
+    height: 160px;
+    padding: 12px 20px;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.CheckoutForm input {
+    background: rgb(195, 200, 207);
+    border: none;
+    padding: 8px;
+    font-size: 16px;
+}
+
+.CheckoutForm label {
+    /* color: #49beb7; */
+    /* font-family: 'Futura'; */
+    color: black;
+}
+
+.CheckoutForm h4 {
+    /* color: #49beb7; */
+    font-family: 'Futura';
+    font-size: 22px;
+    margin: 0px;
+}
+
+.CheckoutForm-stateZipRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.CheckoutForm-checkoutButtonArea {
+    text-align: center;
+}
+
+.CheckoutForm-submitButtonArea button {
+    background: #ff502f;
+    color: white;
+    font-family: 'Carter One', cursive;
+    font-size: 26px;
+    margin-top: 12px;
+    border-radius: 4px;
+    /* width: 42%; */
+}

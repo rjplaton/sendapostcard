@@ -3,7 +3,7 @@
 .Compose {
     background-image: url("/wood.jpg");
     background-size: cover;
-    min-height: 100vh;
+    min-height: 100%;
     display: grid;
     grid-template-columns: 65% auto;
     /* grid-template-rows: 75px auto; */
@@ -45,7 +45,7 @@
     grid-column: 2;
     margin-bottom: 40px;
     margin-left: 20px;
-    margin-right: 20px;
+    /* margin-right: 20px; */
     margin-top: 20px;
 
 }

@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import './TestPage.css';
+import StripeCheckout from '../../../components/StripeCheckout/StripeCheckout.js';
+import {Elements, StripeProvider} from 'react-stripe-elements';
+
 
 class TestPage extends Component {
   state = {
@@ -11,7 +14,9 @@ class TestPage extends Component {
     "address_zip": "54321",
     "cardBack_text": "Sample cardback message of hope and inspiration.",
     //
-    "front_template_id": "tmpl_6b35f867e521b41"
+    "front_template_id": "tmpl_6b35f867e521b41",
+    //added card_id in state to allow passing into stripe checkout prop
+    card_id: null,
   }
 
   
@@ -49,14 +54,18 @@ class TestPage extends Component {
       .then(response => response.json())
       .then(data => {
         console.log('Got this back', data);
-
+        
+        //set state with returned card id
+        this.setState({
+          card_id: data.results.insertedIds[0],
+        })
         // Redirect to home page
-        this.props.history.push('/');
+        //this.props.history.push('/');
       });
   }
 
-
   render() {
+    const hasCardId = this.state.card_id
     return (
       <div className="WriteArticle">
         <h1>Create a Postcard</h1>
@@ -113,6 +122,25 @@ class TestPage extends Component {
         <br />
 
         <button onClick={this.submit}>Send Postcard</button>
+        
+
+        { //check if there is a card_id in state, if yes - show stripe checkout
+          //pass card_id via props
+          hasCardId ? 
+            (
+              <StripeProvider apiKey="pk_test_REGGeT4oO3tm4dsgHEo4Uisr00bsqbcD1w">
+                <div className="example">
+                 <h1>React Stripe Elements Example</h1>
+                   <Elements>
+                     <StripeCheckout 
+                    card_id={this.state.card_id} />
+                   </Elements>
+                </div>
+              </StripeProvider>
+            ) : (
+              <div>No Card ID yet</div>) }
+
+
       </div>
 
     );
