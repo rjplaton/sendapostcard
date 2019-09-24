@@ -14,6 +14,7 @@ class MessageForm extends Component {
                         name="message"
                         onClick={this.props.forceFlipToBack}
                         onChange={this.props.handleMessageChange}
+                        value={this.props.formData.message || ""}
                         />
                     </span>
 
@@ -28,6 +29,7 @@ class MessageForm extends Component {
                         name="recName"
                         type="text"
                         onChange={this.props.handleFormChange}
+                        value={this.props.formData.recName || ""}
                         />
                     </span>
 
@@ -37,6 +39,7 @@ class MessageForm extends Component {
                         name="recAddress1"
                         type="text"
                         onChange={this.props.handleFormChange}
+                        value={this.props.formData.recAddress1 || ""}
                         />
                     </span>
 
@@ -46,6 +49,7 @@ class MessageForm extends Component {
                         name="recAddress2"
                         type="text"
                         onChange={this.props.handleFormChange}
+                        value={this.props.formData.recAddress2 || ""}
                         />
                     </span>
 
@@ -55,6 +59,7 @@ class MessageForm extends Component {
                         name="recCity"
                         type="text"
                         onChange={this.props.handleFormChange}
+                        value={this.props.formData.recCity || ""}
                         />
                     </span>
 
@@ -65,6 +70,7 @@ class MessageForm extends Component {
                             name="recState"
                             type="text"
                             onChange={this.props.handleFormChange}
+                            value={this.props.formData.recState || ""}
                         />
                         </span>
 
@@ -74,6 +80,7 @@ class MessageForm extends Component {
                             name="recZip"
                             type="text"
                             onChange={this.props.handleFormChange}
+                            value={this.props.formData.recZip || ""}
                         />
                         </span>
                     </div>

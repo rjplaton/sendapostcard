@@ -9,24 +9,60 @@ class Compose extends Component {
         text: '',
         showBack: false,
         formData: {
-            message: "Dolor sit amet, consectetur adipiscing elit. Etiam leo purus, laoreet in ex vel, eleifend pharetra sapien. Pellentesque nec mauris eget lectus porttitor imperdiet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor sit amet, consectetur adipiscing elit. Etiam leo purus, laoreet in ex vel, eleifend pharetra sapien.",
-            recName: "Somename Somebody",
-            recAddress1: "123 Sesame Street",
-            recAddress2: "Apartment 3",
-            recCity: "New York",
-            recState: "NY",
-            recZip: "00000",
+            message: null,
+            recName: null,
+            recAddress1: null,
+            recAddress2: null,
+            recCity: null, 
+            recState: null,
+            recZip: null,
         },
         showCheckout: false,
+        card_id: null,
     }
 
     checkout = (ev) => {
+        ev.preventDefault();
         console.log("show checkout form");
-        this.setState({showCheckout: true});
+
+        const formData = {
+            toAddress: {
+              name: this.state.formData.recName,
+              address_line1: this.state.formData.recAddress1,
+              address_line2: this.state.formData.recAddress2,
+              address_city: this.state.formData.recCity,
+              address_state: this.state.formData.recState,
+              address_zip: this.state.formData.recZip,
+              address_country: "US"
+            },
+            cardBack_text: this.state.formData.message,
+            frontTemplateId: this.state.front_template_id,
+            status: "saved",
+            stripeChargeId: null,
+            lobApiId: null,
+            createDate: new Date(),
+            lastModifiedDate: new Date(), //TODO: modify date when editing
+          };
+
+        fetch('/api/mongodb/sendapostcard/postcards', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(formData),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Got this back', data);
+            console.log('Got this id back', data.results.insertedIds[0])
+
+            this.setState({
+                card_id: data.results.insertedIds[0],
+                showCheckout: true,
+            })
+        })
     }
 
     showMessageForm = () => {
-        console.log("show message form")
+        console.log("show message form", this.state.card_id);
         this.setState({showCheckout: false});
     }
 
@@ -87,6 +123,7 @@ class Compose extends Component {
                         showCheckout={this.state.showCheckout}
                         checkout={this.checkout}
                         showMessageForm={this.showMessageForm}
+                        card_id={this.state.card_id}
                     />
                 </div>
             </div>
