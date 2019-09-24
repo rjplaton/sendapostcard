@@ -7,8 +7,29 @@ import address from '../../images/other/address.png';
 import Instruction from '../Instruction/Instruction.js';
 import Header from '../header/header.js';
 import './homepage.css';
+import templates from '../../template_images.json';
 
 class Homepage extends Component {
+  state = {
+      images: [
+          {"alt" : "sth", "src" : "https://www.gstatic.com/webp/gallery/1.jpg"},
+          {"alt" : "Arthur Fist", "src" : "https://www.gstatic.com/webp/gallery/2.jpg"},
+        ]
+  }
+
+  componentDidMount() {
+  let data = [];
+  for (let [alt,src] of Object.entries(templates.images)) {
+      data.push({
+          alt: alt,
+          src: src,
+      })
+  }
+  this.setState({
+      images: data,
+  });
+  }
+
   render() {
     return (
       <div className="Homepage">
@@ -32,8 +53,14 @@ class Homepage extends Component {
                   details="Type in where the postcard should be sent to"
              />
          </div>
-         <div className="Homepage-template-display">
          <h1>The templates go here via template components.</h1>
+         <div className="Homepage-template-display">
+
+         { 
+            this.state.images.map(image => (
+                <img alt={image.alt} src={image.src} />
+                ))
+          }
          </div>
       </div>
     );

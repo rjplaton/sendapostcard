@@ -2,7 +2,7 @@
     background: white;
     display: grid;
     grid-template-columns: 100px 1fr 1fr 1fr 100px;
-    grid-template-rows: 300px auto auto;
+    grid-template-rows: 300px auto 100px auto;
 }
 
 .Homepage-intro{
@@ -32,12 +32,17 @@
     color: #003262;
 }
 
-.Homepage-instruction h1{
-    grid-column: span 3;
+h1{
+    grid-row: 3;
+    grid-column: span 5;
     text-align: center;
 }
 
 .Homepage-template-display{
+    grid-row: 4;
     grid-column: span 5;
     text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }

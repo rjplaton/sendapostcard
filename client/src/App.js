@@ -16,8 +16,8 @@ import {Elements, StripeProvider} from 'react-stripe-elements';
 import Compose from './components/pages/Compose/Compose.js';
 import Postcard from './components/Postcard/Postcard.js';
 
-
 class App extends Component {
+
   render() {
     return (
       <div className="App">
