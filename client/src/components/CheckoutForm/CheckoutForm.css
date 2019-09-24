@@ -3,49 +3,26 @@
     padding: 15px;
 }
 
-.CheckoutForm form {
-    height: 92%;
+.CheckoutForm-stripe {
+    font-family: 'Futura';
+    margin-top: 16px;
+    margin-bottom: 16px;
+    padding: 12px;
+    background: #F0F5FB;
 }
 
-.CheckoutForm-flex{
+.CheckoutForm-total {
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
-    height: 100%;
 }
 
-.CheckoutForm span {
-    display: flex;
-    flex-direction: column;
-}
 
-.CheckoutForm small {
-    /* margin-left: 10px; */
-    color: grey;
-}
-
-.CheckoutForm textarea {
-    /* background: #F0F5FB; */
-    background: rgb(195, 200, 207);
-    resize: none;
-    border: none;
-    height: 160px;
-    padding: 12px 20px;
-    font-size: 16px;
-    margin-top: 10px;
-}
-
-.CheckoutForm input {
-    background: rgb(195, 200, 207);
-    border: none;
-    padding: 8px;
-    font-size: 16px;
-}
-
-.CheckoutForm label {
+.CheckoutForm-total p {
     /* color: #49beb7; */
-    /* font-family: 'Futura'; */
+    font-family: 'Futura';
+    font-size: 18px;
     color: black;
+    /* margin: 12px; */
 }
 
 .CheckoutForm h4 {
@@ -55,14 +32,7 @@
     margin: 0px;
 }
 
-.CheckoutForm-stateZipRow {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-
-.CheckoutForm-checkoutButtonArea {
+.CheckoutForm-submitButtonArea {
     text-align: center;
 }
 
@@ -73,5 +43,5 @@
     font-size: 26px;
     margin-top: 12px;
     border-radius: 4px;
-    /* width: 42%; */
+    width: 62%;
 }
