@@ -4,11 +4,20 @@ import './Postcard.css';
 class Postcard extends Component {
     state = {
         isFlipped: false,
+        default_value: {
+            message: "Dolor sit amet, consectetur adipiscing elit. Etiam leo purus, laoreet in ex vel, eleifend pharetra sapien. Pellentesque nec mauris eget lectus porttitor imperdiet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor sit amet, consectetur adipiscing elit. Etiam leo purus, laoreet in ex vel, eleifend pharetra sapien.",
+            recName: "Somename Somebody",
+            recAddress1: "123 Sesame Street",
+            recAddress2: "Apartment 3",
+            recCity: "New York",
+            recState: "NY",
+            recZip: "00000",
+        },
     }
 
-    address2 = this.props.formData.recAddress2 ? <span><span>{this.props.formData.recAddress2}</span><br /></span> : <span></span>;
-
     render() {
+        const message = this.props.formData.message || this.state.default_value.message;
+        const address2 = this.props.formData.recAddress2 ? <span><span>{this.props.formData.recAddress2}</span><br /></span> : <span></span>;
         return (
             <div className="Postcard">
                 <div className={"Postcard-inner ".concat(this.props.showBackClass)} >
@@ -19,7 +28,7 @@ class Postcard extends Component {
                         <div className="Postcard-message">
                             <span>
                                 {
-                                    this.props.formData.message.split("\n").map((line, index) => (
+                                    message.split("\n").map((line, index) => (
                                         <span key={index}>{line}<br /></span>
                                     ))
                                 }
@@ -28,10 +37,14 @@ class Postcard extends Component {
                         <div className="Postcard-addressSide">
                             <div className="Postcard-postage">{"Place Stamp Here"}</div>
                             <div className="Postcard-address">
-                                <span>{this.props.formData.recName}</span><br />
-                                <span>{this.props.formData.recAddress1}</span><br />
-                                {this.address2}
-                                <span>{this.props.formData.recCity} {this.props.formData.recState} {this.props.formData.recZip}</span><br />
+                                <span>{this.props.formData.recName || this.state.default_value.recName}</span><br />
+                                <span>{this.props.formData.recAddress1 || this.state.default_value.recAddress1}</span><br />
+                                {address2}
+                                <span>
+                                    {this.props.formData.recCity || this.state.default_value.recCity}{`, `}
+                                    {this.props.formData.recState || this.state.default_value.recState}{` `}
+                                    {this.props.formData.recZip || this.state.default_value.recZip}
+                                </span><br />
                             </div>
                         </div>
                     </div>

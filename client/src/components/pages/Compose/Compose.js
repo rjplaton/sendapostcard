@@ -9,13 +9,13 @@ class Compose extends Component {
         text: '',
         showBack: false,
         formData: {
-            message: "Dolor sit amet, consectetur adipiscing elit. Etiam leo purus, laoreet in ex vel, eleifend pharetra sapien. Pellentesque nec mauris eget lectus porttitor imperdiet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor sit amet, consectetur adipiscing elit. Etiam leo purus, laoreet in ex vel, eleifend pharetra sapien.",
-            recName: "Somename Somebody",
-            recAddress1: "123 Sesame Street",
-            recAddress2: "Apartment 3",
-            recCity: "New York",
-            recState: "NY",
-            recZip: "00000",
+            message: null,
+            recName: null,
+            recAddress1: null,
+            recAddress2: null,
+            recCity: null, 
+            recState: null,
+            recZip: null,
         },
         showCheckout: false,
         card_id: null,
@@ -62,7 +62,7 @@ class Compose extends Component {
     }
 
     showMessageForm = () => {
-        console.log("show message form")
+        console.log("show message form", this.state.card_id);
         this.setState({showCheckout: false});
     }
 

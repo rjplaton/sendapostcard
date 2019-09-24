@@ -34,6 +34,7 @@ class FormCard extends Component {
                     </StripeProvider>
                     :
                     <MessageForm
+                        formData={this.props.formData}
                         forceFlipToBack={this.props.forceFlipToBack}
                         handleMessageChange={this.props.handleMessageChange}
                         handleFormChange={this.props.handleFormChange}
