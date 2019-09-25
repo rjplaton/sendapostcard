@@ -6,15 +6,14 @@ import {Elements, StripeProvider} from 'react-stripe-elements';
 
 class TestPage extends Component {
   state = {
-    "name": "Donald Duck",
-    "address_line1": "123 Acme Ave.",
-    "address_line2": "Unit 199",
-    "address_city": "Tinseltown",
-    "address_state": "CA",
-    "address_zip": "54321",
-    "cardBack_text": "Sample cardback message of hope and inspiration.",
-    //
-    "front_template_id": "tmpl_6b35f867e521b41",
+    name: "Donald Duck",
+    address_line1: "123 Acme Ave.",
+    address_line2: "Unit 199",
+    address_city: "Tinseltown",
+    address_state: "CA",
+    address_zip: "54321",
+    cardBack_text: "Dear Grandma,<br />I love you very much. I hope your bunions aren't giving you much pain<br />I'm just here in Oakland, trying to get through this coding Bootcamp. It is much harder than I was anticipating. Makes me feel like Arthur when I don't understand what is going on.<br />Love, Andrew",
+    cardFront_image: "arthur_fist",
     //added card_id in state to allow passing into stripe checkout prop
     card_id: null,
   }
@@ -38,7 +37,7 @@ class TestPage extends Component {
         address_country: "US"
       },
       cardBack_text: this.state.cardBack_text,
-      frontTemplateId: this.state.front_template_id,
+      cardFront_image: this.state.cardFront_image,
       status: "saved",
       stripeChargeId: null,
       lobApiId: null,

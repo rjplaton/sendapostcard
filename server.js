@@ -188,7 +188,6 @@ app.post("/charge/:card_id", async (req, res) => {
 });
 
 
-
 // refactored function to kick off lob api request
 async function send_postcard(card_id) {
   const api_key = process.env.LOB_API_KEY;
@@ -197,8 +196,7 @@ async function send_postcard(card_id) {
   const fs = require('fs');
   const Lob = require('lob')(api_key);
 
-  const card_front = fs.readFileSync(`${__dirname}/lob_postcard_html/sample_card_front.html`).toString();
-  const card_back = fs.readFileSync(`${__dirname}/lob_postcard_html/sample_card_back.html`).toString();
+  const card_back  = fs.readFileSync(`${__dirname}/lob_postcard_html/card_back.html`).toString();
 
   //find database record of this postcard, note: toArray returns a promise
   let arr = await db.collection('postcards')
@@ -208,10 +206,8 @@ async function send_postcard(card_id) {
   let card = arr[0]
 
   let lobCardID = await Lob.postcards.create({
-    //description: 'Sample Postcard :(',
     to: card.toAddress,
-    //hardcoded for now
-    front: card.frontTemplateId,
+    front: fs.createReadStream(`${__dirname}/postcard_front_templates/${card.cardFront_image}.jpg`),
     back: card_back,
     merge_variables: {
       cardBackText: card.cardBack_text
@@ -230,6 +226,8 @@ function save_postcard(err, postcard, card_id) {
 
     const data = {
       lobApiId: postcard.id,
+      previewUrl: postcard.url,
+      expectedDeliveryDate: postcard.expected_delivery_date,
       lastModifiedDate: new Date(),
       status: 'sent',
     }

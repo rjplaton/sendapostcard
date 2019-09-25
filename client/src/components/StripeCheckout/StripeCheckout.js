@@ -44,7 +44,7 @@ class StripeCheckout extends Component {
           })
 
         }.bind(this),
-        5000
+        2000
         );
 
       } else {
