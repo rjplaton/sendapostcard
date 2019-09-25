@@ -164,7 +164,8 @@ app.post("/charge/:card_id", async (req, res) => {
     const data = {
             stripeChargeId: status.id,
           }
-    db.collection('postcards')
+          
+    let updatePost = await db.collection('postcards')
         .updateOne(
               {_id: ObjectId(req.params.card_id)}, 
               {$set: data}, 
@@ -172,12 +173,12 @@ app.post("/charge/:card_id", async (req, res) => {
                 if (err) throw err;
                 if (results.result.nModified === 1) {
                   console.log('update db with stripeChargeId -> ' + status.id);
+                  //function to kick off lob api request
+                  send_postcard(req.params.card_id);
                 }
               }
           );
 
-    //function to kick off lob api request
-    send_postcard(req.params.card_id);
 
   } catch (err) {
     res.status(500).end();
@@ -195,39 +196,21 @@ function send_postcard (card_id) {
 
   const Lob = require('lob')(api_key);
 
-  const card_front = fs.readFileSync(`${__dirname}/lob_postcard_html/sample_card_front.html`).toString();
-  const card_back = fs.readFileSync(`${__dirname}/lob_postcard_html/sample_card_back.html`).toString();
+//  const card_front = fs.readFileSync(`${__dirname}/lob_postcard_html/sample_card_front.html`).toString();
+  const card_back  = fs.readFileSync(`${__dirname}/lob_postcard_html/card_back.html`).toString();
 
   
   //find database record of this postcard
   db.collection('postcards')
     .find({_id: ObjectId(card_id)})
     .toArray((err, card_DB_Obj) => {
-      // Got data back.. send to client
-      if (err) throw err;
-      
+      if (err) throw err;      
       console.log('found db record to use for sending postcard to Lob ->',card_DB_Obj);
-      
-      // Create the address
-//      const mailing_address = {
-//        name: 'Robin Joseph',
-//        //email: 'test@gmail.com',
-//        //phone: '123456789',
-//        address_line1: '123 Test Street',
-//        address_line2: 'Unit 199',
-//        address_city: 'Chicago',
-//        address_state: 'IL',
-//        address_zip: '60012',
-//        address_country: 'US'
-//      };
-      
 
       // Send Postcard
       Lob.postcards.create({
-        //description: 'Sample Postcard :(',
         to: card_DB_Obj[0].toAddress,
-        //hardcoded for now
-        front: card_DB_Obj[0].frontTemplateId,
+        front: fs.createReadStream(`${__dirname}/postcard_front_templates/${card_DB_Obj[0].cardFront_image}.jpg`),
         back: card_back,
         merge_variables: {
           cardBackText: card_DB_Obj[0].cardBack_text
@@ -240,6 +223,8 @@ function send_postcard (card_id) {
           
           const data = {
             lobApiId: postcard.id,
+            previewUrl: postcard.url,
+            expectedDeliveryDate: postcard.expected_delivery_date,
             lastModifiedDate: new Date(),
             status: 'sent',
           }
@@ -255,7 +240,6 @@ function send_postcard (card_id) {
                 }
               }
             );
-
         }
       });
     });

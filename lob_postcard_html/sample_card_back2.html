@@ -23,6 +23,10 @@
         background: #009974;
         border: solid 2px white;
       }
+      
+      p {
+        margin: 0;
+      }
 
       #safe-area {
         position: absolute;
@@ -36,35 +40,50 @@
       
       /* This will give the address and postage box a ~1px border on all sides */
       #ink-free {
-        position: absolute;
+        /*position: absolute;*/
         width: 3.3in;
         height: 2.39in;
-        right: 0.075in;
-        bottom: 0.055in;
+        /*right: 0.075in;
+        bottom: 0.055in;*/
         background-color: red;
+        float: right;
+        clear: right;
       }
 
       .text {
         /*text-transform: uppercase;*/
-        /*margin: 10px;*/
-        width: 240;
+        margin: 2px;
+        /*width: 200px;*/
         font-size: 16px;
         font-weight: 700;
         color: #009974;
         border: solid 2px blue;
       }
+      
+      .spacer {
+          height: calc(100% - 2.445in);
+          width: 0px;
+          float: right;
+      }
+      
     </style>
   </head>
   <body>
     <div id="safe-area">
       <!-- All text should appear within the safe area. -->
       <div class="text">
-        This is the BACK of the postcard you {{cardBackText}}!
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. I hope that you enjoyed this little note. Safe travels my friend.<br/>
-        Goodnight one and all,<br />
-        Drew<br />
+        <div class="spacer"></div>
+        <div id="ink-free">NO WRITE HERE. TEXT WILL FLOAT AROUND.</div>
+        <p> <!--        {{cardBackText}}-->
+          Beginning of text. Blah Blah Blah<br/>
+          Next Line of text aaksdlfja;dsklfjas;dlfkjak<br/>
+          Third line of text. Let's keep going on for awhile awhile awhile awhile awhile awhile awhile.<br/>
+          Fourth line of text. Let's test something longer. Does this go off the page or wrap?</br>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Here is some more placeholder text. Oh lawdy.<br/>
+          GoodBye and Take Care,<br/>
+          Andrew<br/>
+        </p>
       </div>
-      <div id="ink-free">NO WRITE HERE. TEXT WILL BE IN A COLUMN TO THE LEFT.</div>
     </div>
     
   </body>
