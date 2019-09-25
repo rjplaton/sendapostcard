@@ -21,7 +21,7 @@ class CheckoutForm extends Component {
         let { token } = await this.props.stripe.createToken({ name: "Name" });
         console.log(token.id, this.props.card_id)
         //Adding props for card id to allow passing card_id
-        await fetch("/charge_new/" + this.props.card_id, {
+        await fetch("/charge/" + this.props.card_id, {
             method: "POST",
             headers: { "Content-Type": "text/plain" },
             body: token.id

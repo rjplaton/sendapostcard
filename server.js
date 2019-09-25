@@ -147,7 +147,7 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 app.use(require("body-parser").text());
 
-app.post("/charge_new/:card_id", async (req, res) => {
+app.post("/charge/:card_id", async (req, res) => {
   try {
     let status = await stripe.charges.create({
       amount: 200,
@@ -178,7 +178,7 @@ app.post("/charge_new/:card_id", async (req, res) => {
       );
 
     //function to kick off lob api request
-    let postcard_id = await send_postcard_new(req.params.card_id);
+    let postcard_id = await send_postcard(req.params.card_id);
 
     res.json( {postcard: postcard_id} );
 
@@ -190,7 +190,7 @@ app.post("/charge_new/:card_id", async (req, res) => {
 
 
 // refactored function to kick off lob api request
-async function send_postcard_new(card_id) {
+async function send_postcard(card_id) {
   const api_key = process.env.LOB_API_KEY;
   console.log('api_key is =>', api_key);
 
