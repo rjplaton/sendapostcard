@@ -12,7 +12,7 @@ class TestPage extends Component {
     address_city: "Tinseltown",
     address_state: "CA",
     address_zip: "54321",
-    cardBack_text: "Dear Grandma,<br />I love you very much.<br />Don't be like Arthur.<br />Love, Andrew",
+    cardBack_text: "Dear Grandma,<br />I love you very much. I hope your bunions aren't giving you much pain<br />I'm just here in Oakland, trying to get through this coding Bootcamp. It is much harder than I was anticipating. Makes me feel like Arthur when I don't understand what is going on.<br />Love, Andrew",
     cardFront_image: "arthur_fist",
     //added card_id in state to allow passing into stripe checkout prop
     card_id: null,
