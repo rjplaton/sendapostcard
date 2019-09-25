@@ -68,7 +68,7 @@ app.put('/api/mongodb/:collectionName/', (request, response) => {
   }
 
   db.collection(collectionName)
-    .updateOne(query, {$set: data}, (err, results) => {
+    .updateOne(query, { $set: data }, (err, results) => {
       if (err) throw err;
 
       // If we modified exactly 1, then success, otherwise failure
@@ -129,7 +129,7 @@ app.post('/api/mongodb/sendapostcard/:collectionName/', (request, response) => {
         'success': true,
         'results': results,
       });
-      
+
       //get the _id from the resulting db insert and pass to a call to the lob_api
       //this should be moved to the code that will prompt user to make Stripe payment and, upon successfull payment, will cause creation of postcard using Lob API
       const card_id = results.ops[0]._id;
@@ -155,30 +155,32 @@ app.post("/charge/:card_id", async (req, res) => {
       description: "An example charge",
       source: req.body
     });
-    res.json(status);
+
     //print the card_id - will use this later for function below
     console.log('card id: ' + req.params.card_id)
-    
+
 
     //function to store charge id to the appropriate user's postcard
     const data = {
-            stripeChargeId: status.id,
-          }
-          
-    let updatePost = await db.collection('postcards')
-        .updateOne(
-              {_id: ObjectId(req.params.card_id)}, 
-              {$set: data}, 
-              (err, results) => {
-                if (err) throw err;
-                if (results.result.nModified === 1) {
-                  console.log('update db with stripeChargeId -> ' + status.id);
-                  //function to kick off lob api request
-                  send_postcard(req.params.card_id);
-                }
-              }
-          );
+      stripeChargeId: status.id,
+    }
 
+    db.collection('postcards')
+      .updateOne(
+        { _id: ObjectId(req.params.card_id) },
+        { $set: data },
+        (err, results) => {
+          if (err) throw err;
+          if (results.result.nModified === 1) {
+            console.log('update db with stripeChargeId -> ' + status.id);
+          }
+        }
+      );
+
+    //function to kick off lob api request
+    let postcard_id = await send_postcard(req.params.card_id);
+
+    res.json( {postcard: postcard_id} );
 
   } catch (err) {
     res.status(500).end();
@@ -186,77 +188,75 @@ app.post("/charge/:card_id", async (req, res) => {
 });
 
 
-
-//function to kick off lob api request
-function send_postcard (card_id) {
-  const fs = require('fs');
-
+// refactored function to kick off lob api request
+async function send_postcard(card_id) {
   const api_key = process.env.LOB_API_KEY;
   console.log('api_key is =>', api_key);
 
+  const fs = require('fs');
   const Lob = require('lob')(api_key);
 
-//  const card_front = fs.readFileSync(`${__dirname}/lob_postcard_html/sample_card_front.html`).toString();
   const card_back  = fs.readFileSync(`${__dirname}/lob_postcard_html/card_back.html`).toString();
 
+  //find database record of this postcard, note: toArray returns a promise
+  let arr = await db.collection('postcards')
+    .find({ _id: ObjectId(card_id) })
+    .toArray();
+
+  let card = arr[0]
+
+  let lobCardID = await Lob.postcards.create({
+    to: card.toAddress,
+    front: fs.createReadStream(`${__dirname}/postcard_front_templates/${card.cardFront_image}.jpg`),
+    back: card_back,
+    merge_variables: {
+      cardBackText: card.cardBack_text
+    }
+  }, (err, postcard) => save_postcard(err, postcard, card_id))
   
-  //find database record of this postcard
-  db.collection('postcards')
-    .find({_id: ObjectId(card_id)})
-    .toArray((err, card_DB_Obj) => {
-      if (err) throw err;      
-      console.log('found db record to use for sending postcard to Lob ->',card_DB_Obj);
-
-      // Send Postcard
-      Lob.postcards.create({
-        to: card_DB_Obj[0].toAddress,
-        front: fs.createReadStream(`${__dirname}/postcard_front_templates/${card_DB_Obj[0].cardFront_image}.jpg`),
-        back: card_back,
-        merge_variables: {
-          cardBackText: card_DB_Obj[0].cardBack_text
-        }
-      }, (err, postcard) => {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log('The Lob API responded with this postcard object:', postcard.id, postcard.url);
-          
-          const data = {
-            lobApiId: postcard.id,
-            previewUrl: postcard.url,
-            expectedDeliveryDate: postcard.expected_delivery_date,
-            lastModifiedDate: new Date(),
-            status: 'sent',
-          }
-          
-          db.collection('postcards')
-            .updateOne(
-              {_id: ObjectId(card_id)}, 
-              {$set: data}, 
-              (err, results) => {
-                if (err) throw err;
-                if (results.result.nModified === 1) {
-                  console.log('update postcard after successful send to Lob for card_id ->', ObjectId(card_id));
-                }
-              }
-            );
-        }
-      });
-    });
-
+  return(lobCardID.id);
 };
+
+// lob has created postcard, save the lobCardID to the database
+function save_postcard(err, postcard, card_id) {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log('The Lob API responded with this postcard object:', postcard.id, postcard.url);
+
+    const data = {
+      lobApiId: postcard.id,
+      previewUrl: postcard.url,
+      expectedDeliveryDate: postcard.expected_delivery_date,
+      lastModifiedDate: new Date(),
+      status: 'sent',
+    }
+
+    db.collection('postcards')
+      .updateOne(
+        { _id: ObjectId(card_id) },
+        { $set: data },
+        (err, results) => {
+          if (err) throw err;
+          if (results.result.nModified === 1) {
+            console.log('update postcard after successful send to Lob for card_id ->', ObjectId(card_id));
+          }
+        }
+      );
+  }
+}
 
 //get LobApiId using a card_id
 app.get('/getLobApiId/:card_id', (req, res) => {
   console.log('card id:', req.params.card_id)
   db.collection('postcards')
-    .find({_id: ObjectId(req.params.card_id)})
+    .find({ _id: ObjectId(req.params.card_id) })
     .toArray((err, card_DB_Obj) => {
       if (err) throw err;
       console.log('Lob Api Id:', card_DB_Obj[0].lobApiId);
       res.json({
-      lobApiId: card_DB_Obj[0].lobApiId,
-        })
+        lobApiId: card_DB_Obj[0].lobApiId,
+      })
     });
 
 
@@ -277,7 +277,7 @@ app.get('/thank-you/:lobApiId', (request, response) => {
     response.json({
       deliveryDate: res.expected_delivery_date,
       lobApiId: request.params.lobApiId,
-      })
+    })
   });
 
 });
@@ -320,7 +320,7 @@ const mongoDbDatabaseName = splitUrl[splitUrl.length - 1];
 
 let db;
 // First connect to MongoDB, then start HTTP server
-MongoClient.connect(MONGODB_URL, {useNewUrlParser: true}, (err, client) => {
+MongoClient.connect(MONGODB_URL, { useNewUrlParser: true }, (err, client) => {
   if (err) throw err;
   console.log("--MongoDB connection successful");
   db = client.db(mongoDbDatabaseName);

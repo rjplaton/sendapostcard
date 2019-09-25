@@ -19,6 +19,7 @@ class Compose extends Component {
         },
         showCheckout: false,
         card_id: null,
+        front_template_id: "tmpl_6b35f867e521b41",
     }
 
     checkout = (ev) => {
