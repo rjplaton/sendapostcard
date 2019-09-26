@@ -1,0 +1,12 @@
+.Template {
+    margin: 6px;
+    padding: 5px;
+    
+    background-color: #ebefd0;
+}
+
+.Template img {
+    padding: 10px;
+    height: 174px;
+    width: 261px;
+}

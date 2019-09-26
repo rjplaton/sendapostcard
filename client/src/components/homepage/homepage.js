@@ -4,33 +4,18 @@ import intro from '../../images/other/intro.jpg';
 import pickacard from '../../images/other/pickacard.jpg';
 import message from '../../images/other/message.png';
 import address from '../../images/other/address.png';
+
 import Instruction from '../Instruction/Instruction.js';
 import Header from '../header/header.js';
+import Template from '../Template/Template.js';
 import './homepage.css';
-import templates from '../../template_images.json';
-
+import { Link, Switch, Route } from 'react-router-dom'
+import {templateIDs} from './TemplateID.js';
 class Homepage extends Component {
-  state = {
-      images: [
-          {"alt" : "sth", "src" : "https://www.gstatic.com/webp/gallery/1.jpg"},
-          {"alt" : "Arthur Fist", "src" : "https://www.gstatic.com/webp/gallery/2.jpg"},
-        ]
-  }
-
-  componentDidMount() {
-  let data = [];
-  for (let [alt,src] of Object.entries(templates.images)) {
-      data.push({
-          alt: alt,
-          src: src,
-      })
-  }
-  this.setState({
-      images: data,
-  });
-  }
 
   render() {
+      let names = ["arthur_fist","good_thinking","i_know_where_you_live","is_pigeon"];
+
     return (
       <div className="Homepage">
         <div className="Homepage-intro">
@@ -55,12 +40,13 @@ class Homepage extends Component {
          </div>
          <h1>The templates go here via template components.</h1>
          <div className="Homepage-template-display">
-
-         { 
-            this.state.images.map(image => (
-                <img alt={image.alt} src={image.src} />
-                ))
-          }
+         <Link to="/compose/">
+            <Template names="arthur_fist" title="arthur_fist" />
+         </Link>
+            {templateIDs.map(template => (
+                <Template templateID={template.id} names = {template.file_name} title = {template.title}/>
+            ))}
+            
          </div>
       </div>
     );
@@ -68,3 +54,8 @@ class Homepage extends Component {
 }
 
 export default Homepage;
+//         { 
+//            this.state.images.map(image => (
+//                <img alt={image.alt} src={image.src} />
+//                ))
+//          }

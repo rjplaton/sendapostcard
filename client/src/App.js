@@ -33,6 +33,7 @@ class App extends Component {
             <Route exact path='/postcard/' component={Postcard} />
             <Route exact path='/testpage/' component={TestPage} />
             <Route exact path='/thank-you/:lobApiId' component={ThankYou} />
+            <Route exact path='/compose/:templateId' component={Compose} />
           </Switch>
         
          {//example of Stripe component using public test key
