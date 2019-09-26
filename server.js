@@ -207,7 +207,7 @@ async function send_postcard(card_id) {
 
   let lobCardID = await Lob.postcards.create({
     to: card.toAddress,
-    front: fs.createReadStream(`${__dirname}/postcard_front_templates/${card.cardFront_image}.jpg`),
+    front: fs.createReadStream(`${__dirname}/client/public/postcard_front_templates/${card.cardFront_image}.jpg`),
     back: card_back,
     merge_variables: {
       cardBackText: card.cardBack_text
