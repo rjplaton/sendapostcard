@@ -19,6 +19,7 @@ class Postcard extends Component {
         const message = this.props.formData.message || this.state.default_value.message;
         const address2 = this.props.formData.recAddress2 ? <span><span>{this.props.formData.recAddress2}</span><br /></span> : <span></span>;
         return (
+            <div className="foo">
             <div className="Postcard">
                 <div className={"Postcard-inner ".concat(this.props.showBackClass)} >
                     <div className="Postcard-front" onClick={() => this.props.flipPostCard()}>
@@ -49,6 +50,7 @@ class Postcard extends Component {
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         )
     }

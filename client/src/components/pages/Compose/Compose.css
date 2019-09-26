@@ -35,9 +35,9 @@
 .Compose-cardArea {
     /* grid-row: 2; */
     grid-column: 1;
-    padding-top: 40px;
-    margin-left: auto;
-    margin-right: auto;
+    padding: 40px;
+    /* margin-left: auto;
+    margin-right: auto; */
 }
 
 .Compose-controlArea {
