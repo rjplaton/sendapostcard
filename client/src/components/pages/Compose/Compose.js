@@ -19,7 +19,7 @@ class Compose extends Component {
         },
         showCheckout: false,
         card_id: null,
-        front_template_id: "tmpl_6b35f867e521b41",
+        cardFront_image: "arthur_fist",
     }
 
     checkout = (ev) => {
@@ -37,7 +37,7 @@ class Compose extends Component {
               address_country: "US"
             },
             cardBack_text: this.state.formData.message,
-            frontTemplateId: this.state.front_template_id,
+            cardFront_image: this.state.cardFront_image,
             status: "saved",
             stripeChargeId: null,
             lobApiId: null,
