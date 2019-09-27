@@ -45,7 +45,8 @@ class TestPage extends Component {
       lastModifiedDate: null,
     };
 
-    fetch('/api/mongodb/sendapostcard/postcards', {
+    //Save a completed postcard to the database
+    fetch('/api/mongodb/sendapostcard', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(formData),

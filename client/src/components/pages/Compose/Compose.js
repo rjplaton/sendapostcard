@@ -62,7 +62,7 @@ class Compose extends Component {
             lastModifiedDate: new Date(), //TODO: modify date when editing
           };
 
-        fetch('/api/mongodb/sendapostcard/postcards', {
+        fetch('/api/mongodb/sendapostcard', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(formData),
