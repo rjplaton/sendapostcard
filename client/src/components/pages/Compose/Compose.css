@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Carter+One|Fredoka+One|Manjari|Roboto&display=swap');
 
 .Compose {
-    background-color: white;
+    background-color: #e3e3e3;
     background-size: cover;
     min-height: 100%;
     display: grid;
