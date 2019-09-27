@@ -178,10 +178,9 @@ app.post("/charge/:card_id", async (req, res) => {
       );
 
     //function to kick off lob api request
-    let postcard_id = await send_postcard(req.params.card_id);
-
-    res.json( {postcard: postcard_id} );
-
+    let postcard_id = send_postcard(req.params.card_id, (postcard_id) => {
+      res.json( {postcard: postcard_id} );
+    });
   } catch (err) {
     res.status(500).end();
   }
@@ -189,7 +188,7 @@ app.post("/charge/:card_id", async (req, res) => {
 
 
 // refactored function to kick off lob api request
-async function send_postcard(card_id) {
+function send_postcard(card_id, callback) {
   const api_key = process.env.LOB_API_KEY;
   console.log('api_key is =>', api_key);
 
@@ -199,22 +198,27 @@ async function send_postcard(card_id) {
   const card_back  = fs.readFileSync(`${__dirname}/lob_postcard_html/card_back.html`).toString();
 
   //find database record of this postcard, note: toArray returns a promise
-  let arr = await db.collection('postcards')
+  db.collection('postcards')
     .find({ _id: ObjectId(card_id) })
-    .toArray();
-
-  let card = arr[0]
-
-  let lobCardID = await Lob.postcards.create({
-    to: card.toAddress,
-    front: fs.createReadStream(`${__dirname}/postcard_front_templates/${card.cardFront_image}.jpg`),
-    back: card_back,
-    merge_variables: {
-      cardBackText: card.cardBack_text
-    }
-  }, (err, postcard) => save_postcard(err, postcard, card_id))
-  
-  return(lobCardID.id);
+    .toArray((err, documents) => {
+      let card = documents[0];
+      console.log("Cardback_text: ", card.cardBack_text);
+      Lob.postcards.create({
+        to: card.toAddress,
+        front: fs.createReadStream(`${__dirname}/client/public/postcard_front_templates/${card.cardFront_image}.jpg`),
+        back: card_back,
+        merge_variables: {
+          cardBackText: card.cardBack_text
+        }
+      }, (err, postcard) => {
+        if (err) {
+          console.log("Error creating postcard from Lob", err);
+        } else {
+          save_postcard(err, postcard, card_id);
+          callback(postcard.id);
+        }
+      });
+    });
 };
 
 // lob has created postcard, save the lobCardID to the database
