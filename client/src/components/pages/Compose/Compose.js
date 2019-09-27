@@ -129,7 +129,6 @@ class Compose extends Component {
                 <div className="Compose-cardArea">
                     <Postcard
                         fileName={this.state.templateName}
-                        templateId={this.state.templateID}
                         formData={this.state.formData}
                         flipPostCard={this.flipPostCard} 
                         showBackClass={this.state.showBack? "Postcard-showBack": ""}

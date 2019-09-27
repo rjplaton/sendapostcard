@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Postcard.css';
-import {templateIDs} from '../homepage/TemplateID.js';
+
 class Postcard extends Component {
     state = {
         isFlipped: false,
@@ -16,18 +16,14 @@ class Postcard extends Component {
     }
 
     render() {
-<<<<<<< HEAD
-        const template = this.props.templateId;
-        const message = this.props.formData.message || this.state.default_value.message;
-=======
         const messageHTML = this.props.formData.messageHTML || this.state.default_value.message;
->>>>>>> 73998f357811406dbbfd82ebe7142c7fc7227647
+
         const address2 = this.props.formData.recAddress2 ? <span><span>{this.props.formData.recAddress2}</span><br /></span> : <span></span>;
         return (
             <div className="Postcard">
                 <div className={"Postcard-inner ".concat(this.props.showBackClass)} >
                     <div className="Postcard-front" onClick={() => this.props.flipPostCard()}>
-                        <img src={"./postcard_front_templates/"+ this.props.fileName +".jpg"} />
+                        <img src={"../postcard_front_templates/" + this.props.fileName + ".jpg"} alt="postcard front" />
                     </div>
                     <div className="Postcard-back">
                         <div className="Postcard-message">
