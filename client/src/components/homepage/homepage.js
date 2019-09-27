@@ -43,8 +43,8 @@ class Homepage extends Component {
          <Link to="/compose/">
             <Template names="arthur_fist" title="arthur_fist" />
          </Link>
-            {templateIDs.map(template => (
-                <Template templateID={template.id} names = {template.file_name} title = {template.title}/>
+            {templateIDs.map((template, index) => (
+                <Template key={index} templateID={template.id} names = {template.file_name} title = {template.title}/>
             ))}
             
          </div>

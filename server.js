@@ -133,7 +133,7 @@ app.post('/api/mongodb/sendapostcard/:collectionName/', (request, response) => {
       //get the _id from the resulting db insert and pass to a call to the lob_api
       //this should be moved to the code that will prompt user to make Stripe payment and, upon successfull payment, will cause creation of postcard using Lob API
       const card_id = results.ops[0]._id;
-      console.log('card_id ->', card_id);
+      // console.log('card_id ->', card_id);
 
 
     });
@@ -157,7 +157,8 @@ app.post("/charge/:card_id", async (req, res) => {
     });
 
     //print the card_id - will use this later for function below
-    console.log('card id: ' + req.params.card_id)
+    let locStrings = ["#### /charge/"]
+    console.log(locStrings.join(" "), ' card id: ' + req.params.card_id)
 
 
     //function to store charge id to the appropriate user's postcard
@@ -172,15 +173,21 @@ app.post("/charge/:card_id", async (req, res) => {
         (err, results) => {
           if (err) throw err;
           if (results.result.nModified === 1) {
-            console.log('update db with stripeChargeId -> ' + status.id);
+            locStrings.push("#### DB updateOne");
+            console.log(locStrings.join(" "), 'stripeChargeId: ' + status.id);
           }
         }
       );
 
+    // locStrings.pop();
     //function to kick off lob api request
-    let postcard_id = await send_postcard(req.params.card_id);
-
-    res.json( {postcard: postcard_id} );
+    let postcard_id = send_postcard(req.params.card_id, locStrings, (postcard_id) => {
+      locStrings.push("#### send_postcard callback");
+      console.log(locStrings.join(" "), "postcard_id: ", postcard_id);
+      res.json({
+        postcard: postcard_id
+      });
+    });
 
   } catch (err) {
     res.status(500).end();
@@ -189,40 +196,55 @@ app.post("/charge/:card_id", async (req, res) => {
 
 
 // refactored function to kick off lob api request
-async function send_postcard(card_id) {
+function send_postcard(card_id, locStrings, callback) {
   const api_key = process.env.LOB_API_KEY;
   console.log('api_key is =>', api_key);
 
   const fs = require('fs');
   const Lob = require('lob')(api_key);
 
-  const card_back  = fs.readFileSync(`${__dirname}/lob_postcard_html/card_back.html`).toString();
+  const card_back = fs.readFileSync(`${__dirname}/lob_postcard_html/card_back.html`).toString();
 
+  locStrings.push("#### send_postcard");
+  console.log(locStrings.join(" "));
   //find database record of this postcard, note: toArray returns a promise
-  let arr = await db.collection('postcards')
+  db.collection('postcards')
     .find({ _id: ObjectId(card_id) })
-    .toArray();
+    .toArray((err, documents) => {
+      locStrings.push("#### toArray callback");
+      console.log(locStrings.join(" "), "documents: ", documents);
+      let card = documents[0];
 
-  let card = arr[0]
-
-  let lobCardID = await Lob.postcards.create({
-    to: card.toAddress,
-    front: fs.createReadStream(`${__dirname}/client/public/postcard_front_templates/${card.cardFront_image}.jpg`),
-    back: card_back,
-    merge_variables: {
-      cardBackText: card.cardBack_text
-    }
-  }, (err, postcard) => save_postcard(err, postcard, card_id))
-  
-  return(lobCardID.id);
+      Lob.postcards.create({
+        to: card.toAddress,
+        front: fs.createReadStream(`${__dirname}/client/public/postcard_front_templates/${card.cardFront_image}.jpg`),
+        back: card_back,
+        merge_variables: {
+          cardBackText: card.cardBack_text
+        }
+      }, (err, postcard) => {
+        locStrings.push("#### lob create callback");
+        console.log(locStrings.join(" "), err, postcard);
+        // if (err) {
+        //   console.log(err);
+        // } else {
+        //   locStrings.push("#### lob create callback");
+        //   console.log(locStrings.join(" "), "postcard: ", postcard);
+        //   save_postcard(err, postcard, card_id, locStrings);
+        //   callback(lobCardID.id);
+        // }
+      });
+    });
 };
 
 // lob has created postcard, save the lobCardID to the database
-function save_postcard(err, postcard, card_id) {
+function save_postcard(err, postcard, card_id, locStrings) {
   if (err) {
     console.log(err);
   } else {
-    console.log('The Lob API responded with this postcard object:', postcard.id, postcard.url);
+    locStrings.push("#### save_postcard");
+    console.log(locStrings.join(" "));
+    // console.log('The Lob API responded with this postcard object:', postcard.id, postcard.url);
 
     const data = {
       lobApiId: postcard.id,
@@ -239,7 +261,9 @@ function save_postcard(err, postcard, card_id) {
         (err, results) => {
           if (err) throw err;
           if (results.result.nModified === 1) {
-            console.log('update postcard after successful send to Lob for card_id ->', ObjectId(card_id));
+            locStrings.push("#### updateOne callback");
+            console.log(locStrings.join(" "), "updated with lobAPIId");
+            // console.log('update postcard after successful send to Lob for card_id ->', ObjectId(card_id));
           }
         }
       );

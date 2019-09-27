@@ -5,8 +5,6 @@ import FormCard from '../../FormCard/FormCard.js';
 
 class Compose extends Component {
     state = {
-        title: '',
-        text: '',
         showBack: false,
         formData: {
             message: null,

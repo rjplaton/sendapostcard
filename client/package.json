@@ -7,7 +7,7 @@
     "react": "16.6.3",
     "react-dom": "16.6.3",
     "react-router-dom": "4.3.1",
-    "react-scripts": "2.1.1",
+    "react-scripts": "^3.1.2",
     "react-stripe-checkout": "^2.6.3",
     "react-stripe-elements": "^5.0.0"
   },
@@ -25,5 +25,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "jest": "^24.9.0"
+  }
 }
