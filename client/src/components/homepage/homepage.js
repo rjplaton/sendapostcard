@@ -40,9 +40,6 @@ class Homepage extends Component {
          </div>
          <h1>The templates go here via template components.</h1>
          <div className="Homepage-template-display">
-         <Link to="/compose/">
-            <Template names="arthur_fist" title="arthur_fist" />
-         </Link>
             {templateIDs.map(template => (
                 <Template templateID={template.id} names = {template.file_name} title = {template.title}/>
             ))}
