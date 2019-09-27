@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import './Compose.css';
 import Postcard from '../../Postcard/Postcard.js';
 import FormCard from '../../FormCard/FormCard.js';
+import {templateIDs} from '../../homepage/TemplateID.js';
 
 class Compose extends Component {
     state = {
+        templateID: null,
+        templateName: "",
         title: '',
         text: '',
         showBack: false,
@@ -22,6 +25,14 @@ class Compose extends Component {
         cardFront_image: "arthur_fist",
     }
 
+    componentDidMount() {
+        const template = templateIDs[this.props.match.params.templateId];
+        const template_name = template.file_name;
+        this.setState({
+            templateID: template,
+            templateName: template_name,
+         });
+     }
     checkout = (ev) => {
         ev.preventDefault();
         console.log("show checkout form");
@@ -100,6 +111,7 @@ class Compose extends Component {
     }
 
     render() {
+
         return (
             <div className="Compose">
                 {/* <nav className="Compose-navigation">
@@ -108,6 +120,8 @@ class Compose extends Component {
 
                 <div className="Compose-cardArea">
                     <Postcard
+                        fileName={this.state.templateName}
+                        templateId={this.state.templateID}
                         formData={this.state.formData}
                         flipPostCard={this.flipPostCard} 
                         showBackClass={this.state.showBack? "Postcard-showBack": ""}
