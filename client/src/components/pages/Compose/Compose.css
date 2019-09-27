@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Carter+One|Fredoka+One|Manjari|Roboto&display=swap');
 
 .Compose {
-    background-image: url("/wood.jpg");
+    /* background-image: url("/wood.jpg"); */
+    background-color: white;
     background-size: cover;
     min-height: 100%;
     display: grid;
