@@ -202,6 +202,7 @@ function send_postcard(card_id, callback) {
     .find({ _id: ObjectId(card_id) })
     .toArray((err, documents) => {
       let card = documents[0];
+      console.log("Cardback_text: ", card.cardBack_text);
       Lob.postcards.create({
         to: card.toAddress,
         front: fs.createReadStream(`${__dirname}/client/public/postcard_front_templates/${card.cardFront_image}.jpg`),
