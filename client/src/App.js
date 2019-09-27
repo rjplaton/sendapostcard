@@ -54,9 +54,7 @@ class App extends Component {
             <Link to="/">Home</Link>
             <Link to="/about/">About</Link>
             <Link to="/term/">Terms & Privacy</Link>
-            <Link to="/write/">Write Article</Link>
             <Link to="/compose/">Compose</Link>
-            <Link to="/postcard/">PostCard</Link>
             <Link to="/testpage/">TestPage</Link>
           </nav>
         </div>
