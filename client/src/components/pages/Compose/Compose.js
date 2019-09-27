@@ -30,7 +30,7 @@ class Compose extends Component {
             toAddress: {
               name: this.state.formData.recName,
               address_line1: this.state.formData.recAddress1,
-              address_line2: this.state.formData.recAddress2,
+              address_line2: this.state.formData.recAddress2 === null ? "" : this.state.formData.recAddress2,
               address_city: this.state.formData.recCity,
               address_state: this.state.formData.recState,
               address_zip: this.state.formData.recZip,
