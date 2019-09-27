@@ -207,12 +207,13 @@ function send_postcard(card_id, locStrings, callback) {
 
   locStrings.push("#### send_postcard");
   console.log(locStrings.join(" "));
+  
   //find database record of this postcard, note: toArray returns a promise
   db.collection('postcards')
     .find({ _id: ObjectId(card_id) })
     .toArray((err, documents) => {
       locStrings.push("#### toArray callback");
-      console.log(locStrings.join(" "), "documents: ", documents);
+      console.log(locStrings.join(" "), "documents: ", documents[0]);
       let card = documents[0];
 
       Lob.postcards.create({
@@ -223,16 +224,14 @@ function send_postcard(card_id, locStrings, callback) {
           cardBackText: card.cardBack_text
         }
       }, (err, postcard) => {
-        locStrings.push("#### lob create callback");
-        console.log(locStrings.join(" "), err, postcard);
-        // if (err) {
-        //   console.log(err);
-        // } else {
-        //   locStrings.push("#### lob create callback");
-        //   console.log(locStrings.join(" "), "postcard: ", postcard);
-        //   save_postcard(err, postcard, card_id, locStrings);
-        //   callback(lobCardID.id);
-        // }
+        if (err) {
+          console.log("ERR", err);
+        } else {
+          locStrings.push("#### lob create callback");
+          console.log(locStrings.join(" "), "postcard: ", postcard);
+          save_postcard(err, postcard, card_id, locStrings);
+          callback(postcard.id);
+        }
       });
     });
 };
