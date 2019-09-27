@@ -10,6 +10,7 @@ class Compose extends Component {
         showBack: false,
         formData: {
             message: null,
+            messageHTML: null,
             recName: null,
             recAddress1: null,
             recAddress2: null,
@@ -26,6 +27,9 @@ class Compose extends Component {
         ev.preventDefault();
         console.log("show checkout form");
 
+        console.log("MessageHTML: ", this.state.formData.messageHTML);
+        console.log("Message: ", this.state.formData.message);
+
         const formData = {
             toAddress: {
               name: this.state.formData.recName,
@@ -36,7 +40,9 @@ class Compose extends Component {
               address_zip: this.state.formData.recZip,
               address_country: "US"
             },
-            cardBack_text: this.state.formData.message,
+            cardBack_text: this.state.formData.message.split("\n").map((line, index) => (
+                ["<span>", line, "<br /></span>"].join("")
+            )).join(""),
             cardFront_image: this.state.cardFront_image,
             status: "saved",
             stripeChargeId: null,
@@ -78,9 +84,11 @@ class Compose extends Component {
     }
 
     handleMessageChange = (event) => {
-        // console.log(event.target.value);
         let formData = this.state.formData;
         formData.message = event.target.value;
+        formData.messageHTML = event.target.value.split("\n").map((line, index) => (
+            <span key={index}>{line}<br /></span>
+        ));
         this.setState({formData: formData});
         // console.log("handlemessagechange");
     }

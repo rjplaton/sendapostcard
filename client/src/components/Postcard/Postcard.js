@@ -16,7 +16,7 @@ class Postcard extends Component {
     }
 
     render() {
-        const message = this.props.formData.message || this.state.default_value.message;
+        const messageHTML = this.props.formData.messageHTML || this.state.default_value.message;
         const address2 = this.props.formData.recAddress2 ? <span><span>{this.props.formData.recAddress2}</span><br /></span> : <span></span>;
         return (
             <div className="Postcard">
@@ -27,11 +27,7 @@ class Postcard extends Component {
                     <div className="Postcard-back">
                         <div className="Postcard-message">
                             <span>
-                                {
-                                    message.split("\n").map((line, index) => (
-                                        <span key={index}>{line}<br /></span>
-                                    ))
-                                }
+                                {messageHTML}
                             </span>
                         </div>
                         <div className="Postcard-addressSide">
