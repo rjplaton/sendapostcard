@@ -51,6 +51,15 @@
     color: black;
 }
 
+.hasError {
+    display: flex;
+    justify-content: space-between;
+}
+
+.hasError small {
+    color: red;
+}
+
 .MessageForm h4 {
     /* color: #49beb7; */
     font-family: 'Roboto';
@@ -77,4 +86,9 @@
     margin-top: 12px;
     border-radius: 4px;
     width: 42%;
+    opacity: .5;
+}
+
+#MessageForm-valid {
+    opacity: 1;
 }

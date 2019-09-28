@@ -3,6 +3,7 @@ import './Compose.css';
 import Postcard from '../../Postcard/Postcard.js';
 import FormCard from '../../FormCard/FormCard.js';
 import {templateIDs} from '../../homepage/TemplateID.js';
+import * as Yup from 'yup';
 
 class Compose extends Component {
     state = {
@@ -12,25 +13,33 @@ class Compose extends Component {
         text: '',
         showBack: false,
         formData: {
-            message: null,
-            messageHTML: null,
-            recName: null,
-            recAddress1: null,
-            recAddress2: null,
-            recCity: null, 
-            recState: null,
-            recZip: null,
+            message: "",
+            messageHTML: "",
+            recName: "",
+            recAddress1: "",
+            recAddress2: "",
+            recCity: "", 
+            recState: "",
+            recZip: "",
         },
         message_len: 0,
         formErrors: {
-            message: null,
-            messageHTML: null,
-            recName: null,
-            recAddress1: null,
-            recAddress2: null,
-            recCity: null, 
-            recState: null,
-            recZip: null,
+            message: "",
+            recName: "",
+            recAddress1: "",
+            recAddress2: "",
+            recCity: "", 
+            recState: "",
+            recZip: "",
+        },
+        formTouched: {
+            message: false,
+            recName: false,
+            recAddress1: false,
+            recAddress2: false,
+            recCity: false, 
+            recState: false,
+            recZip: false,
         },
         showCheckout: false,
         card_id: null,
@@ -45,6 +54,7 @@ class Compose extends Component {
             templateName: template_name,
          });
      }
+
     checkout = (ev) => {
         ev.preventDefault();
         console.log("show checkout form");
@@ -52,7 +62,6 @@ class Compose extends Component {
         console.log("MessageHTML: ", this.state.formData.messageHTML);
         console.log("Message: ", this.state.formData.message);
 
-        const message_limit = 400;
 
         const formData = {
             toAddress: {
@@ -107,10 +116,60 @@ class Compose extends Component {
         this.setState({ showBack: true });
     }
 
+    handleBlur = (e) => {
+        const AddressSchema = Yup.object().shape({
+            message: Yup.string()
+                .min(1, 'Please provide a message')
+                .max(401, 'Message must be under 400 characters.')
+                .required('Required'),
+            recName: Yup.string()
+                .matches(/^[a-zA-Z\s]*$/, 'Please enter a valid name.')
+                .max(30, 'Name must be less than 30 characters.')
+                .required('Required'),
+            recAddress1: Yup.string()
+                .matches(/^\d+(\s[A-z]+)+/, 'Please enter a valid address')
+                .max(30, 'Address must be less than 30 characters.')
+                .required('Required'),
+            recAddress2: Yup.string()
+                .max(30, 'Address must be less than 30 characters.'),
+            recCity: Yup.string()
+                .matches(/^[a-zA-Z\s]*$/, 'Please enter a valid city.')
+                .max(30, 'City must be less than 30 characters')
+                .required('Required'),
+            recState: Yup.string()
+                .min(2, '2 digit code')
+                .max(2, '2 digit code')
+                .required('Required'),
+            recZip: Yup.string()
+                .matches(/^[0-9]{5}(?:-[0-9]{4})?$/, 'Please enter a valid zip')
+                .required('Required'),
+        })
+
+        let name = e.nativeEvent.target.name
+        let formErrors = {}
+        AddressSchema.validate(this.state.formData, {abortEarly: false}).catch(function(err) {
+            err.inner.forEach((error) => {
+                formErrors[error.path] = error.message;
+            })
+        }).then(() => {
+            let formTouched = this.state.formTouched;
+            if (!formTouched[name]) {
+                let formTouched = this.state.formTouched;
+                formTouched[name] = true;
+                this.setState({formTouched: formTouched});
+            }
+
+            this.setState({formErrors: formErrors, formTouched: formTouched});
+        })
+    }
+
     handleMessageChange = (event) => {
+        const message_limit = 400;
         let formData = this.state.formData;
         formData.message = event.target.value;
-        if (formData.message <= this.message_limit) {
+        // console.log(formData.message.length, message_limit);
+
+        if (formData.message.length < message_limit) {
             formData.messageHTML = event.target.value.split("\n").map((line, index) => (
                 <span key={index}>{line}<br /></span>
             ));
@@ -131,12 +190,9 @@ class Compose extends Component {
         formData[name] = value;
 
         this.setState({formData: formData});
-        
-        // console.log(this.state.formData);
     }
 
     render() {
-
         return (
             <div className="Compose">
                 {/* <nav className="Compose-navigation">
@@ -163,6 +219,9 @@ class Compose extends Component {
                         checkout={this.checkout}
                         showMessageForm={this.showMessageForm}
                         card_id={this.state.card_id}
+                        formErrors={this.state.formErrors}
+                        formTouched={this.state.formTouched}
+                        handleBlur={this.handleBlur}
                     />
                 </div>
             </div>
