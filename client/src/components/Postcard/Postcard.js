@@ -16,14 +16,7 @@ class Postcard extends Component {
     }
 
     render() {
-<<<<<<< HEAD
-        const template = this.props.templateId;
-        const message = this.props.formData.message || this.state.default_value.message;
         const messageHTML = this.props.formData.messageHTML || this.state.default_value.message;
-=======
-        const messageHTML = this.props.formData.messageHTML || this.state.default_value.message;
-
->>>>>>> 106fe1e8a41438b39026598bf8e2bd34d75825df
         const address2 = this.props.formData.recAddress2 ? <span><span>{this.props.formData.recAddress2}</span><br /></span> : <span></span>;
         return (
             <div className="Postcard">

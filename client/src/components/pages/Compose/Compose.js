@@ -47,15 +47,11 @@ class Compose extends Component {
               address_zip: this.state.formData.recZip,
               address_country: "US"
             },
-<<<<<<< HEAD
-            cardBack_text: this.state.formData.message,
-            cardFront_image: this.state.cardFront_image,
-=======
+
             cardBack_text: this.state.formData.message.split("\n").map((line, index) => (
                 ["<span>", line, "<br /></span>"].join("")
             )).join(""),
             cardFront_image: this.state.templateName,
->>>>>>> 106fe1e8a41438b39026598bf8e2bd34d75825df
             status: "saved",
             stripeChargeId: null,
             lobApiId: null,
