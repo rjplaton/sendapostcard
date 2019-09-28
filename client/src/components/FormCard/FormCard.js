@@ -23,7 +23,7 @@ class FormCard extends Component {
                     </div>
                 }
                 {this.props.showCheckout ?
-                    <StripeProvider apiKey="pk_test_REGGeT4oO3tm4dsgHEo4Uisr00bsqbcD1w">
+                    <StripeProvider apiKey="pk_live_YzbZeTXWmebCvg5lOYuHBMuA00uGbxWbsO">
                         <div className="FormCard-checkout">
                             <Elements>
                                 <CheckoutForm

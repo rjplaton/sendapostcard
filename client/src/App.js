@@ -7,6 +7,7 @@ import './App.css';
 import Header from './components/header/header.js'
 
 import Homepage from './components/homepage/homepage.js';
+import Footer from './components/Footer/Footer.js';
 import TestPage from './components/pages/TestPage/TestPage.js';
 import ThankYou from './components/pages/ThankYou/ThankYou.js';
 
@@ -16,6 +17,9 @@ import {Elements, StripeProvider} from 'react-stripe-elements';
 
 import Compose from './components/pages/Compose/Compose.js';
 import Postcard from './components/Postcard/Postcard.js';
+import About from './components/pages/About/About.js';
+import TermsOfService from './components/pages/TermsOfService/TermsOfService.js';
+import PrivacyPolicy from './components/pages/PrivacyPolicy/PrivacyPolicy.js';
 
 class App extends Component {
 
@@ -34,30 +38,14 @@ class App extends Component {
             <Route exact path='/testpage/' component={TestPage} />
             <Route exact path='/thank-you/:lobApiId' component={ThankYou} />
             <Route exact path='/compose/:templateId' component={Compose} />
+            <Route exact path='/about/' component={About} />
+            <Route exact path='/terms-of-service/' component={TermsOfService} />   
+            <Route exact path='/privacy-policy/' component={PrivacyPolicy} />
           </Switch>
-        
-         {//example of Stripe component using public test key
-/*              <StripeProvider apiKey="pk_test_REGGeT4oO3tm4dsgHEo4Uisr00bsqbcD1w">
-              <div className="example">
-               <h1>React Stripe Elements Example</h1>
-               <Elements>
-                 <StripeCheckout />
-               </Elements>
-             </div>
-              </StripeProvider>*/
-            }
 
         </div>
         
-        <div className="App-footer">
-          <nav>
-            <Link to="/">Home</Link>
-            <Link to="/about/">About</Link>
-            <Link to="/term/">Terms & Privacy</Link>
-            <Link to="/compose/">Compose</Link>
-            <Link to="/testpage/">TestPage</Link>
-          </nav>
-        </div>
+        <Footer />
 
       
       </div>
