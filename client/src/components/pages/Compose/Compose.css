@@ -1,11 +1,12 @@
-@import url('https://fonts.googleapis.com/css?family=Carter+One|Fredoka+One|Manjari|Roboto&display=swap');
+
+
 
 .Compose {
-    background-color: white;
+    background-color: #e3e3e3;
     background-size: cover;
     min-height: 100%;
     display: grid;
-    grid-template-columns: 65% auto;
+    grid-template-columns: 100%;
     /* grid-template-rows: 75px auto; */
     grid-row-gap: 40px;
 }
@@ -42,27 +43,29 @@
 
 .Compose-controlArea {
     /* grid-row: 2; */
-    grid-column: 2;
-    margin-bottom: 40px;
-    margin-left: 20px;
-    /* margin-right: 20px; */
-    margin-top: 20px;
-
+    grid-column: 1;
+    margin: 10%;
 }
 
-/* .WriteArticle input,
-.WriteArticle textarea,
-.WriteArticle button {
-  font-size: 24pt;
-  background: none;
-  color: white;
-  padding: 10px;
-  width: 100%;
-  display: block;
-  border: 2px solid white;
-} */
-/* 
-.WriteArticle button {
-  color: black;
-  background: #61dafb;
-} */
+@media (min-width: 700px) {
+    .Compose {
+        display: grid;
+        grid-template-columns: 65% auto;
+    }
+
+    .Compose-cardArea {
+        /* grid-row: 2; */
+        grid-column: 1;
+        padding-top: 40px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .Compose-controlArea {
+        grid-column: 2;
+        margin-bottom: 40px;
+        margin-left: 20px;
+        /* margin-right: 20px; */
+        margin-top: 20px;
+    }
+}

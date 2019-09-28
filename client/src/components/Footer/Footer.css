@@ -1,0 +1,30 @@
+.App-footer {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 40px;
+    padding-left: 40px;
+    padding-right: 40px;
+    background: #ff502f;
+    min-height: 100%;
+    padding-bottom: 60px;
+}
+
+.App-footer nav a{
+    padding: 10px;
+    padding-top: 0px;
+    color: white;
+    display: inline-block;
+    font-size: x-large;
+    font-family: 'Carter One', cursive;
+    text-decoration: none;
+}
+
+.App-footer	nav a:hover {
+	color: #49beb7;
+}
+
+.Copyright {
+	position: absolute;
+	text-align: center;
+	padding-top: 90px;
+}

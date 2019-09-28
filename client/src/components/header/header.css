@@ -1,8 +1,11 @@
 .Header{
     background: #ff502f;
     color: #ebefd0;
-    display:flex;
     grid-column: span 3;
+}
+
+.Header div {
+    display: flex;
     flex-direction: row;
     justify-content: center;
     text-align: center;
@@ -15,7 +18,19 @@
 }
 
 .Header-title {
+    font-family: 'Carter One', cursive;
     font-size: 2.5em;
     align-self: center;
     padding-left: 10px;
 }
+
+.Header h1 {
+    margin: 0;
+    /* padding: 0; */
+}
+.Header a {
+    width: 50%;
+    color: white;
+    text-decoration: none;
+}
+
