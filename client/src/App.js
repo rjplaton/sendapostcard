@@ -7,6 +7,7 @@ import './App.css';
 import Header from './components/header/header.js'
 
 import Homepage from './components/homepage/homepage.js';
+import Footer from './components/Footer/Footer.js';
 import TestPage from './components/pages/TestPage/TestPage.js';
 import ThankYou from './components/pages/ThankYou/ThankYou.js';
 
@@ -44,16 +45,7 @@ class App extends Component {
 
         </div>
         
-        <div className="App-footer">
-          <nav>
-            <Link to="/">Home</Link>
-            <Link to="/about/">About</Link>
-            <Link to="/terms-of-service/">Terms of Service</Link>
-            <Link to="/privacy-policy/">Privacy Policy</Link>
-            <Link to="/compose/">Compose</Link>
-            <Link to="/testpage/">TestPage</Link>
-          </nav>
-        </div>
+        <Footer />
 
       
       </div>
