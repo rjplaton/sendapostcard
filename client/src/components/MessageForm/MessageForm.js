@@ -6,7 +6,7 @@ class MessageForm extends Component {
     render() {
       return (
         <div className="MessageForm">
-            <form>
+            <form noValidate>
                 <div className="MessageForm-flex">
                     <span>
                         <h4>Message</h4>

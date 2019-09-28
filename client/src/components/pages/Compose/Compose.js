@@ -21,6 +21,17 @@ class Compose extends Component {
             recState: null,
             recZip: null,
         },
+        message_len: 0,
+        formErrors: {
+            message: null,
+            messageHTML: null,
+            recName: null,
+            recAddress1: null,
+            recAddress2: null,
+            recCity: null, 
+            recState: null,
+            recZip: null,
+        },
         showCheckout: false,
         card_id: null,
 //        cardFront_image: "arthur_fist",
@@ -40,6 +51,8 @@ class Compose extends Component {
 
         console.log("MessageHTML: ", this.state.formData.messageHTML);
         console.log("Message: ", this.state.formData.message);
+
+        const message_limit = 400;
 
         const formData = {
             toAddress: {
@@ -97,11 +110,15 @@ class Compose extends Component {
     handleMessageChange = (event) => {
         let formData = this.state.formData;
         formData.message = event.target.value;
-        formData.messageHTML = event.target.value.split("\n").map((line, index) => (
-            <span key={index}>{line}<br /></span>
-        ));
-        this.setState({formData: formData});
-        // console.log("handlemessagechange");
+        if (formData.message <= this.message_limit) {
+            formData.messageHTML = event.target.value.split("\n").map((line, index) => (
+                <span key={index}>{line}<br /></span>
+            ));
+            this.setState({formData: formData});
+        }
+        else {
+            console.log("Message is too long");
+        }
     }
 
     handleFormChange = (event) => {
