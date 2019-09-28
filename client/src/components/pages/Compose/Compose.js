@@ -23,7 +23,7 @@ class Compose extends Component {
         },
         showCheckout: false,
         card_id: null,
-        cardFront_image: "arthur_fist",
+//        cardFront_image: "arthur_fist",
     }
 
     componentDidMount() {
@@ -54,7 +54,7 @@ class Compose extends Component {
             cardBack_text: this.state.formData.message.split("\n").map((line, index) => (
                 ["<span>", line, "<br /></span>"].join("")
             )).join(""),
-            cardFront_image: this.state.cardFront_image,
+            cardFront_image: this.state.templateName,
             status: "saved",
             stripeChargeId: null,
             lobApiId: null,

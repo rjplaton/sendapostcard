@@ -1,12 +1,14 @@
 <html>
   <head>
     <style>
-      @font-face {
+    /*
+       @font-face {
         font-family: 'Loved by the King';
         font-style: normal;
         font-weight: 400;
         src: url('https://s3-us-west-2.amazonaws.com/public.lob.com/fonts/lovedByTheKing/LovedbytheKing.ttf') format('truetype');
-      }
+       }
+    */
 
       *, *:before, *:after {
         -webkit-box-sizing: border-box;
@@ -19,9 +21,11 @@
         height: 4.25in;
         margin: 0;
         padding: 0;
-        font-family: 'Loved by the King';
-        background: #009974;
-        border: solid 2px white;
+        font-family: 'Arial', sans-serif;
+        background-color: white;
+        border: solid 1px gray;
+        font-size: 14px;
+        /*font-weight: 700;*/
       }
 
       #safe-area {
@@ -30,11 +34,14 @@
         height: 3.875in;
         left: 0.1875in;
         top: 0.1875in;
+        /*
         background-color: yellow;
         border-radius: 4px;
+        */
       }
       
       /* This will give the address and postage box a ~1px border on all sides */
+      /*
       #ink-free {
         position: absolute;
         width: 3.3in;
@@ -43,15 +50,15 @@
         bottom: 0.055in;
         background-color: red;
       }
+      */
 
       .text {
         /*text-transform: uppercase;*/
-        margin: 2px;
-        width: 240;
-        font-size: 16px;
-        font-weight: 700;
-        color: #009974;
-        /*border: solid 2px blue;*/
+        padding: 4px;
+        width: 2.5in;
+        height: 100%;
+        /*color: #009974;*/
+        border-right: dashed 2px gray;
       }
     </style>
   </head>
@@ -61,7 +68,7 @@
       <div class="text">
         {{cardBackText}}
       </div>
-      <div id="ink-free">NO WRITE HERE. TEXT WILL BE IN A COLUMN TO THE LEFT.</div>
+<!--      <div id="ink-free">NO WRITE HERE. TEXT WILL BE IN A COLUMN TO THE LEFT.</div>-->
     </div>
     
   </body>
