@@ -47,7 +47,7 @@
     margin: 10%;
 }
 
-@media (min-width: 700px) {
+@media (min-width: 910px) {
     .Compose {
         display: grid;
         grid-template-columns: 65% auto;

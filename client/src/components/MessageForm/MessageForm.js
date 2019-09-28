@@ -113,7 +113,7 @@ class MessageForm extends Component {
                                 {formErrors.recZip && formTouched.recZip ? (
                                     <div className="hasError"><label>Zip</label> <small>{formErrors.recZip}</small></div>
                                 ) :
-                                    (<label>recZip</label>)
+                                    (<label>Zip</label>)
                                 }
                                 <input
                                     name="recZip"

@@ -92,7 +92,7 @@
     line-height: 2;
 }
 
-@media (min-width: 700px) {
+@media (min-width: 910px) {
     .Postcard {
         background-color: transparent;
         perspective: 3000px;
