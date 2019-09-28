@@ -15,112 +15,112 @@ app.use(express.json());
 // unsecured front-end applications. Should not be used in production.
 
 
-// GET for getting existing item
-app.get('/api/mongodb/:collectionName/', (request, response) => {
-  const collectionName = request.params.collectionName;
+//// GET for getting existing item
+//app.get('/api/mongodb/:collectionName/', (request, response) => {
+//  const collectionName = request.params.collectionName;
 
-  // Get GET params, if there are any
-  const query = request.query || {};
+//  // Get GET params, if there are any
+//  const query = request.query || {};
 
-  // Due to a requirement of MongoDB, whenever we query based on _id field, we
-  // have to do it like this using ObjectId
-  if (query._id) {
-    query._id = ObjectId(query._id);
-  }
+//  // Due to a requirement of MongoDB, whenever we query based on _id field, we
+//  // have to do it like this using ObjectId
+//  if (query._id) {
+//    query._id = ObjectId(query._id);
+//  }
 
-  db.collection(collectionName)
-    .find(query)
-    .toArray((err, results) => {
-      // Got data back.. send to client
-      if (err) throw err;
-      response.json(results);
-    });
-});
+//  db.collection(collectionName)
+//    .find(query)
+//    .toArray((err, results) => {
+//      // Got data back.. send to client
+//      if (err) throw err;
+//      response.json(results);
+//    });
+//});
 
-// POST for creating a new item
-app.post('/api/mongodb/:collectionName/', (request, response) => {
-  const collectionName = request.params.collectionName;
-  const data = request.body;
+//// POST for creating a new item
+//app.post('/api/mongodb/:collectionName/', (request, response) => {
+//  const collectionName = request.params.collectionName;
+//  const data = request.body;
 
-  db.collection(collectionName)
-    .insert(data, (err, results) => {
-      // Got data back.. send to client
-      if (err) throw err;
+//  db.collection(collectionName)
+//    .insert(data, (err, results) => {
+//      // Got data back.. send to client
+//      if (err) throw err;
 
-      response.json({
-        'success': true,
-        'results': results,
-      });
-    });
-});
-
-
-// PUT endpoint for modifying an existing item
-app.put('/api/mongodb/:collectionName/', (request, response) => {
-  const collectionName = request.params.collectionName;
-  const data = request.body;
-  const query = request.query;
-
-  // Due to a requirement of MongoDB, whenever we query based on _id field, we
-  // have to do it like this using ObjectId
-  if (query._id) {
-    query._id = ObjectId(query._id);
-  }
-
-  db.collection(collectionName)
-    .updateOne(query, { $set: data }, (err, results) => {
-      if (err) throw err;
-
-      // If we modified exactly 1, then success, otherwise failure
-      if (results.result.nModified === 1) {
-        response.json({
-          success: true,
-        });
-      } else {
-        response.json({
-          success: false,
-        });
-      }
-    });
-});
+//      response.json({
+//        'success': true,
+//        'results': results,
+//      });
+//    });
+//});
 
 
-// D in CRUD, delete a single item with given criteria
-app.delete('/api/mongodb/:collectionName/', (request, response) => {
-  const collectionName = request.params.collectionName;
-  const query = request.query;
+//// PUT endpoint for modifying an existing item
+//app.put('/api/mongodb/:collectionName/', (request, response) => {
+//  const collectionName = request.params.collectionName;
+//  const data = request.body;
+//  const query = request.query;
 
-  // Due to a requirement of MongoDB, whenever we query based on _id field, we
-  // have to do it like this using ObjectId
-  if (query._id) {
-    query._id = ObjectId(query._id);
-  }
+//  // Due to a requirement of MongoDB, whenever we query based on _id field, we
+//  // have to do it like this using ObjectId
+//  if (query._id) {
+//    query._id = ObjectId(query._id);
+//  }
 
-  db.collection(collectionName)
-    .deleteOne(query, (err, results) => {
-      if (err) throw err;
+//  db.collection(collectionName)
+//    .updateOne(query, { $set: data }, (err, results) => {
+//      if (err) throw err;
 
-      // If we deleted exactly 1, then success, otherwise failure
-      if (results.result.n === 1) {
-        response.json({
-          success: true,
-        });
-      } else {
-        response.json({
-          success: false,
-        });
-      }
-    })
-});
+//      // If we modified exactly 1, then success, otherwise failure
+//      if (results.result.nModified === 1) {
+//        response.json({
+//          success: true,
+//        });
+//      } else {
+//        response.json({
+//          success: false,
+//        });
+//      }
+//    });
+//});
+
+
+//// D in CRUD, delete a single item with given criteria
+//app.delete('/api/mongodb/:collectionName/', (request, response) => {
+//  const collectionName = request.params.collectionName;
+//  const query = request.query;
+
+//  // Due to a requirement of MongoDB, whenever we query based on _id field, we
+//  // have to do it like this using ObjectId
+//  if (query._id) {
+//    query._id = ObjectId(query._id);
+//  }
+
+//  db.collection(collectionName)
+//    .deleteOne(query, (err, results) => {
+//      if (err) throw err;
+
+//      // If we deleted exactly 1, then success, otherwise failure
+//      if (results.result.n === 1) {
+//        response.json({
+//          success: true,
+//        });
+//      } else {
+//        response.json({
+//          success: false,
+//        });
+//      }
+//    })
+//});
 
 
 // POST for saving a newly created postcard
-app.post('/api/mongodb/sendapostcard/:collectionName/', (request, response) => {
-  const collectionName = request.params.collectionName;
+app.post('/api/mongodb/sendapostcard', (request, response) => {
+//  const collectionName = request.params.collectionName;
   const data = request.body;
 
   //Mongo DB Function to store "saved card" in a collectionName
-  db.collection(collectionName)
+  db.collection('postcards')
     .insert(data, (err, results) => {
       // Got data back.. send to client
       if (err) throw err;

@@ -6,13 +6,13 @@ import {Elements, StripeProvider} from 'react-stripe-elements';
 
 class TestPage extends Component {
   state = {
-    name: "Donald Duck",
-    address_line1: "123 Acme Ave.",
-    address_line2: "Unit 199",
-    address_city: "Tinseltown",
+    name: "Grandma Chiurco",
+    address_line1: "11110 Clinton Bar Rd.",
+    address_line2: "",
+    address_city: "Pine Grove",
     address_state: "CA",
-    address_zip: "54321",
-    cardBack_text: "Dear Grandma,<br />I love you very much. I hope your bunions aren't giving you much pain<br />I'm just here in Oakland, trying to get through this coding Bootcamp. It is much harder than I was anticipating. Makes me feel like Arthur when I don't understand what is going on.<br />Love, Andrew",
+    address_zip: "93432",
+    cardBack_text: "Dear Grandma,<br/>I love you very much. I hope your bunions aren't giving you much pain<br/>I'm just here in Oakland, trying to get through this coding Bootcamp. It is much harder than I was anticipating. Makes me feel like Arthur when I don't understand what is going on.<br/>Love, Andrew",
     cardFront_image: "arthur_fist",
     //added card_id in state to allow passing into stripe checkout prop
     card_id: null,
@@ -45,7 +45,8 @@ class TestPage extends Component {
       lastModifiedDate: null,
     };
 
-    fetch('/api/mongodb/sendapostcard/postcards', {
+    //Save a completed postcard to the database
+    fetch('/api/mongodb/sendapostcard', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(formData),
