@@ -12,32 +12,35 @@ class CheckoutForm extends Component {
             complete: false,
             error: false,
             lobCardID: null,
+            validationErrorMessage: '',
         };
         this.submit = this.submit.bind(this);
     }
 
+    handleChange = ({ error }) => {
+        if (error) {
+            this.setState({ validationErrorMessage: error.message });
+        } else {
+            this.setState({ validationErrorMessage: '' });
+        }
+    };
+
     async submit(ev) {
         ev.preventDefault();
         let { token } = await this.props.stripe.createToken({ name: "Name" });
-        console.log(token.id, this.props.card_id)
         //Adding props for card id to allow passing card_id
         await fetch("/charge/" + this.props.card_id, {
             method: "POST",
             headers: { "Content-Type": "text/plain" },
             body: token.id
         }).then(response => response.json())
-        .then(data => {
-            console.log("LALA data", data);
-            this.setState({lobCardID: data.postcard});
-        })
+            .then(data => {
+                this.setState({ lobCardID: data.postcard });
+            })
     }
 
     render() {
         if (this.state.lobCardID) {
-            console.log(this.state.lobCardID);
-            // return (
-            //     <div><h4>Thank you!</h4></div>
-            // )
             return <Redirect to={'/thank-you/' + this.state.lobCardID} />;
         }
         if (this.state.error)
@@ -46,7 +49,10 @@ class CheckoutForm extends Component {
             <div className="CheckoutForm">
                 <h4>Payment Info</h4>
                 <div className="CheckoutForm-stripe">
-                    <CardElement style={{ base: { fontSize: '18px' } }} />
+                    <CardElement
+                        style={{ base: { fontSize: '18px' } }}
+                        onChange={this.handleChange}
+                    />
                 </div>
                 {/* <h4>Order Details</h4> */}
                 <div className="CheckoutForm-total">
@@ -54,8 +60,14 @@ class CheckoutForm extends Component {
                     <p>$2.00</p>
                 </div>
                 {/* <button onClick={this.props.submit}>Send</button> */}
+                <div className="error" role="alert">
+                    {this.state.validationErrorMessage}
+                </div>
                 <div className="CheckoutForm-submitButtonArea">
-                    <button onClick={this.submit}>
+                    <button
+                        disabled={this.state.validationErrorMessage.length !== 0}
+                        onClick={this.submit}
+                    >
                         Submit Payment
                 </button>
                 </div>

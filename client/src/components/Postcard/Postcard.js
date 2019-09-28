@@ -5,7 +5,8 @@ class Postcard extends Component {
     state = {
         isFlipped: false,
         default_value: {
-            message: "Dolor sit amet, consectetur adipiscing elit. Etiam leo purus, laoreet in ex vel, eleifend pharetra sapien. Pellentesque nec mauris eget lectus porttitor imperdiet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor sit amet, consectetur adipiscing elit. Etiam leo purus, laoreet in ex vel, eleifend pharetra sapien.",
+            message: "Hello Friend,",
+            latin_message: "Dolor sit amet, consectetur adipiscing elit. Etiam leo purus, laoreet in ex vel, eleifend pharetra sapien. Pellentesque nec mauris eget lectus porttitor imperdiet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor sit amet, consectetur adipiscing elit. Etiam leo purus, laoreet in ex vel, eleifend pharetra sapien.",
             recName: "Somename Somebody",
             recAddress1: "123 Sesame Street",
             recAddress2: "Apartment 3",
@@ -31,7 +32,7 @@ class Postcard extends Component {
                             </span>
                         </div>
                         <div className="Postcard-addressSide">
-                            <div className="Postcard-postage">{"Place Stamp Here"}</div>
+                            <div className="Postcard-postage"><span>{"POSTAGE INDICIA"}</span></div>
                             <div className="Postcard-address">
                                 <span>{this.props.formData.recName || this.state.default_value.recName}</span><br />
                                 <span>{this.props.formData.recAddress1 || this.state.default_value.recAddress1}</span><br />
