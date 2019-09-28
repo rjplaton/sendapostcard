@@ -10,7 +10,14 @@
     grid-template-rows: 50px auto;
     box-sizing: border-box;
     max-height: 800px;
-    max-width: 450px;
+    max-width: 100%;
+}
+
+@media (min-width: 700px) {
+    .FormCard {
+        max-height: 800px;
+        max-width: 450px;
+    }
 }
 
 .FormCard-writeButton {
