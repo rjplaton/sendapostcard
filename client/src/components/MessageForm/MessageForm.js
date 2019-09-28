@@ -7,7 +7,6 @@ class MessageForm extends Component {
         let formTouched = this.props.formTouched;
         
         let validForm = Object.keys(formErrors).length === 0;
-        console.log(validForm);
 
         return (
             <div className="MessageForm">

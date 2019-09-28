@@ -19,10 +19,8 @@ class CheckoutForm extends Component {
 
     handleChange = ({ error }) => {
         if (error) {
-            console.log(error);
             this.setState({ validationErrorMessage: error.message });
         } else {
-            console.log("no error");
             this.setState({ validationErrorMessage: '' });
         }
     };

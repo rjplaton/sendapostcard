@@ -43,7 +43,6 @@ class Compose extends Component {
         },
         showCheckout: false,
         card_id: null,
-//        cardFront_image: "arthur_fist",
     }
 
     componentDidMount() {
@@ -57,11 +56,6 @@ class Compose extends Component {
 
     checkout = (ev) => {
         ev.preventDefault();
-        console.log("show checkout form");
-
-        console.log("MessageHTML: ", this.state.formData.messageHTML);
-        console.log("Message: ", this.state.formData.message);
-
 
         const formData = {
             toAddress: {
@@ -91,8 +85,6 @@ class Compose extends Component {
         })
         .then(response => response.json())
         .then(data => {
-            console.log('Got this back', data);
-            console.log('Got this id back', data.results.insertedIds[0])
 
             this.setState({
                 card_id: data.results.insertedIds[0],
@@ -102,7 +94,6 @@ class Compose extends Component {
     }
 
     showMessageForm = () => {
-        console.log("show message form", this.state.card_id);
         this.setState({showCheckout: false});
     }
 
@@ -120,7 +111,7 @@ class Compose extends Component {
         const AddressSchema = Yup.object().shape({
             message: Yup.string()
                 .min(1, 'Please provide a message')
-                .max(401, 'Message must be under 400 characters.')
+                .max(399, 'Message must be under 400 characters.')
                 .required('Required'),
             recName: Yup.string()
                 .matches(/^[a-zA-Z\s]*$/, 'Please enter a valid name.')
@@ -176,6 +167,9 @@ class Compose extends Component {
             this.setState({formData: formData});
         }
         else {
+            // let formTouched = this.state.formTouched;
+            // formTouched.message = true;
+            // this.setState({formTouched: formTouched});
             console.log("Message is too long");
         }
     }

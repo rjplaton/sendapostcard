@@ -55,6 +55,9 @@
     top: 0.1272in;
     padding: 0;
     border-right: 1px dashed darkgrey;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
 }
 
 .Postcard-addressSide {
